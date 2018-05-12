@@ -1,0 +1,41 @@
+# compiled output
+/ngx-admin/dist
+/ngx-admin/tmp
+/ngx-admin/out-tsc
+
+# dependencies
+**/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+/ngx-admin/.vscode/*
+/ngx-admin/!.vscode/settings.json
+/ngx-admin/!.vscode/tasks.json
+/ngx-admin/!.vscode/launch.json
+/ngx-admin/!.vscode/extensions.json
+
+# misc
+/ngx-admin/.sass-cache
+/ngx-admin/connect.lock
+/ngx-admin/coverage
+/ngx-admin/libpeerconnection.log
+/ngx-admin/npm-debug.log
+/ngx-admin/testem.log
+/ngx-admin/typings
+/ngx-admin/docs
+
+# e2e
+/ngx-admin/e2e/*.js
+/ngx-admin/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db

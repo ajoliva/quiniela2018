@@ -1,0 +1,20 @@
+{
+  "name": "quiniela2018",
+  "version": "1.0.0",
+  "description": "quiniela 2018",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "panorama",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "morgan": "^1.9.0",
+    "mysql": "github:mysqljs/mysql",
+    "path": "^0.12.7"
+  }
+}
