@@ -63,14 +63,60 @@ exports.registerUser = (req, res, next) => {
  * @param {*} next 
  */
 exports.enableUser = (req, res, next) => {
-    //TODO: logic to enable user after payment is done.
+    const isAdmin =  req.authData;
+    if(req.authData.isAdmin != 1) {
+        return res.status(401).json({
+            message: "unauthorized"
+        });
+    }
+    let email = req.body.email; 
+    connection.query("UPDATE users SET activeUser = 1 WHERE users.email = ? AND users.activeUser <> 1", [email], (err, results, fields) => {
+        if(err) {
+            return res.status(500).json({
+                    message: "An error ocurred while updating data.",
+                    error: err
+                });
+            }
+            if(results.affectedRows > 0) {
+            return res.status(200).json({
+                message: "update successful",
+                result: results
+            });
+            } 
+            return res.status(200).json({
+            message: "No Changes were applied"
+        });
+
+    });
 }
 
 /**
  * Disables a user (in case is necessary...)
  */
 exports.disableUser = (req, res, next) => {
-    //TODO: logic to disable user. (In case needed)
+    const isAdmin =  req.authData;
+    if(req.authData.isAdmin != 1) {
+        return res.status(401).json({
+            message: "unauthorized"
+        });
+    }
+    let email = req.body.email; 
+    connection.query("UPDATE users SET activeUser = 0 WHERE users.email = ? AND users.activeUser <> 0", [email], (err, results, fields) => {
+        if(err) {
+            return res.status(500).json({
+                 message: "An error ocurred while updating data.",
+                 error: err
+             });
+         }
+         if(results.affectedRows > 0) {
+            return res.status(200).json({
+                message: "update successful",
+                result: results
+            });
+         } 
+         return res.status(200).json({
+            message: "No Changes were applied"
+        });
+    });
 }
-
 

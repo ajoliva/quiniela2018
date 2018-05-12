@@ -4,30 +4,27 @@ const jwtValidator = require('express-jwt');
 const config = require('../../config.json');
 const connection =  require('../database/config');
 
-exports.checkAuth = jwtValidator({secret: config.auth.JWT_KEY});
+exports.checkAuth = jwtValidator({secret: config.auth.JWT_KEY, requestProperty: 'authData' });
 
 exports.login = (req, res, next) => {
-    console.log("test");
     let email = req.body.email;
     let password = req.body.password;
-    connection.query("SELECT email,password,name FROM users WHERE email = ?", [email], (err, results, fields) => {
+    connection.query("SELECT email,password,name,activeUser,adminUser FROM users WHERE email = ?", [email], (err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "Cannot log in",
                 error: err
             });
         }
-        console.log(results.length);
-        console.log(results);
         if(results.length == 0 ) {
             return res.status(401).json({
                 message: "unauthorized"
             });
         } else {
-            console.log(password);
             const storedPwd = results[0].password;
-            const storedUsername = results[0].username; 
-            console.log(storedPwd);
+            const storedUsername = results[0].name; 
+            const isActive = results[0].activeUser;
+            const isAdmin = results[0].adminUser;
             bcrypt.compare(password, storedPwd, (err, result) => {
                 if(err) {
                     return res.status(401).json({
@@ -38,7 +35,10 @@ exports.login = (req, res, next) => {
                     const token = jwt.sign(
                         {
                             email: email,
-                            userId: storedUsername,
+                            name: storedUsername,
+                            isAdmin: isAdmin,
+                            isActive: isActive
+
                         },
                         config.auth.JWT_KEY,
                         {
