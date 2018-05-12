@@ -4,17 +4,23 @@
   "description": "quiniela 2018",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "panorama",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "compression": "^1.7.2",
     "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.2.1",
     "morgan": "^1.9.0",
-    "mysql": "github:mysqljs/mysql",
+    "mysql": "^2.15.0",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
   }
 }

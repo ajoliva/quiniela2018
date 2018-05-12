@@ -1,0 +1,14 @@
+{
+    "app": {
+        "PORT": 3000
+    },
+    "db": {
+        "DATABASE": "quiniela",
+        "USER": "admin",
+        "PASSWORD": "admin",
+        "HOST": "localhost"
+    },
+    "auth": {
+        "JWT_KEY": "VSbQtqXTowbM01z52Gdc"
+    }
+}

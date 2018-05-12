@@ -5,4 +5,8 @@
 5. npm install
 6. npm run build
 7. cd ..
+For development:
+8.a. npm start 
+    (using nodemon to make live reload when changes are done)
+Prod:
 8. node index.js
