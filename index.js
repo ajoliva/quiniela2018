@@ -28,7 +28,7 @@ app.use('/api/games', gameRoutes);
 
 //error handling
 app.use('/api', (req, res, next) => {
-    const error = new Error('not found');
+    const error = new Error('resource not found');
     error.status = 404;
     next(error);
 });
