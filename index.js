@@ -9,6 +9,7 @@ const config = require('./config.json');
 const dbConnection = require("./api/database/config");
 //importing routers
 const userRoutes = require('./api/routes/users');
+const teamRoutes = require('./api/routes/teams');
 
 app.use(morgan('dev'));
 app.use(compression());
@@ -19,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'ngx-admin/dist/'), { dotfiles: 'all
 
 //user router
 app.use('/api/users', userRoutes);
+//teams router
+app.use('/api/teams', teamRoutes);
 
 //error handling
 app.use('/api', (req, res, next) => {
