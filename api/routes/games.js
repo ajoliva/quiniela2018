@@ -7,7 +7,7 @@ const GamesController = require("../controllers/games");
 const AuthController = require('../auth/loginStatus');
 
 router.get("/gamelist", AuthController.checkAuth, GamesController.getGames);
-router.get("/games/:gameId", AuthController.checkAuth, GamesController.getGame);
+router.get("/:gameId", AuthController.checkAuth, GamesController.getGame);
 
 
 module.exports = router;
