@@ -11,6 +11,7 @@ const dbConnection = require("./api/database/config");
 const userRoutes = require('./api/routes/users');
 const teamRoutes = require('./api/routes/teams');
 const gameRoutes = require('./api/routes/games');
+const predictionRoutes = require('./api/routes/predictions');
 
 app.use(morgan('dev'));
 app.use(compression());
@@ -25,6 +26,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/teams', teamRoutes);
 //games router
 app.use('/api/games', gameRoutes);
+//games router
+app.use('/api/predictions', predictionRoutes);
 
 //error handling
 app.use('/api', (req, res, next) => {

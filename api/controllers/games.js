@@ -111,7 +111,6 @@ exports.setGameScore = (req, res, next) => {
                 error: err
             });
         } 
-        console.log(results);
         if(results.affectedRows > 0) {
             connection.query(gameQuery, [matchId], (err, results, fields) => {
                 if(err) {
@@ -120,7 +119,6 @@ exports.setGameScore = (req, res, next) => {
                         error: err
                     });
                 } else {
-                    console.log(results);
                     if(results.length > 0) {
                         return res.status(201).json({
                             results: results
@@ -140,7 +138,6 @@ exports.setWinner = (req, res, next) => {
     const winnerId = req.body.winnerId;
     const matchId = req.params.matchId;
     const setScoreQuery = "UPDATE game SET winnerId = ? WHERE game.matchId = ?";
-    console.log(setScoreQuery);
     connection.query(setScoreQuery, [winnerId, matchId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({
@@ -148,7 +145,6 @@ exports.setWinner = (req, res, next) => {
                 error: err
             });
         } 
-        console.log(results);
         if(results.affectedRows > 0) {
             connection.query(gameQuery, [matchId], (err, results, fields) => {
                 if(err) {
@@ -157,7 +153,6 @@ exports.setWinner = (req, res, next) => {
                         error: err
                     });
                 } else {
-                    console.log(results);
                     if(results.length > 0) {
                         return res.status(201).json({
                             results: results
