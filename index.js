@@ -10,6 +10,8 @@ const dbConnection = require("./api/database/config");
 //importing routers
 const userRoutes = require('./api/routes/users');
 const teamRoutes = require('./api/routes/teams');
+const gameRoutes = require('./api/routes/games');
+const predictionRoutes = require('./api/routes/predictions');
 
 app.use(morgan('dev'));
 app.use(compression());
@@ -22,10 +24,14 @@ app.use(express.static(path.join(__dirname, 'ngx-admin/dist/'), { dotfiles: 'all
 app.use('/api/users', userRoutes);
 //teams router
 app.use('/api/teams', teamRoutes);
+//games router
+app.use('/api/games', gameRoutes);
+//games router
+app.use('/api/predictions', predictionRoutes);
 
 //error handling
 app.use('/api', (req, res, next) => {
-    const error = new Error('not found');
+    const error = new Error('resource not found');
     error.status = 404;
     next(error);
 });
