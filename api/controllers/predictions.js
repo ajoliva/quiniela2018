@@ -6,26 +6,26 @@ const connection =  require('../database/config');
 
 const allPredictionsQuery = "select prediction.*,\
 a.name AS teamName1,\
-b.name AS teamName2,\
-a.Flag AS teamFlag1,\
-b.Flag AS teamFlag2, \
-c.name AS userName \
+b.name AS teamName2 \
+c.name AS userName, \
+d.name AS winnerName \
 FROM prediction \
 INNER JOIN teams as a ON a.teamId = prediction.teamId1 \
 INNER JOIN teams as b ON b.teamId = prediction.teamId2 \
 INNER JOIN users as c ON c.userId = prediction.userId \
-order by date";
+LEFT JOIN teams as d ON prediction.WinnerId <=>  d.teamId \
+order by GameDate";
 
 const predictionByIdQuery = "select prediction.*,\
 a.name AS teamName1,\
-b.name AS teamName2,\
-a.Flag AS teamFlag1,\
-b.Flag AS teamFlag2, \
-c.name AS userName \
+b.name AS teamName2 \
+c.name AS userName, \
+d.name AS winnerName \
 FROM prediction \
 INNER JOIN teams as a ON a.teamId = prediction.teamId1 \
 INNER JOIN teams as b ON b.teamId = prediction.teamId2 \
 INNER JOIN users as c ON c.userId = prediction.userId \
+LEFT JOIN teams as d ON prediction.WinnerId <=>  d.teamId \
 WHERE  prediction.predictionId= ?";
 
 exports.getAllPredictions = (req, res, next) => {
@@ -53,15 +53,15 @@ exports.getPredictionsbyUser = (req, res, next) => {
     const predictionsByUserQuery = "select prediction.*,\
         a.name AS teamName1,\
         b.name AS teamName2,\
-        a.Flag AS teamFlag1,\
-        b.Flag AS teamFlag2, \
-        c.name AS userName \
+        c.name AS userName, \
+        d.name AS winnerName \
         FROM prediction \
         INNER JOIN teams as a ON a.teamId = prediction.teamId1 \
         INNER JOIN teams as b ON b.teamId = prediction.teamId2 \
         INNER JOIN users as c ON c.userId = prediction.userId \
+        LEFT JOIN teams as d ON prediction.WinnerId <=>  d.teamId \
         WHERE prediction.userId = ? \
-        order by date";
+        order by GameDate";
         connection.query(predictionsByUserQuery, [userId],(err, results, fields) => {
             if(err) {
                 return res.status(500).json({
