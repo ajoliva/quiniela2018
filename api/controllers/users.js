@@ -3,6 +3,7 @@
  */
 
 const connection =  require('../database/config');
+const bcrypt = require('bcrypt');
 
 //Fields used to query user data.
 const userFields = [
@@ -44,13 +45,14 @@ exports.registerUser = (req, res, next) => {
             });
         } else {
             bcrypt.hash(password, 10, (err, hash) => {
+                console.log(password);
                 if(err) {
                     return res.status(500).json({
                         message: "An error ocurred while trying to register.",
                         error: err
                     });
                 }
-                connection.query("INSERT INTO users (name, email, password) VALUES (?,?,?)", [username, email, hash], (err, result) => {
+                connection.query("INSERT INTO users (name, email, password,activeUser,adminUser) VALUES (?,?,?,1,1)", [username, email, hash], (err, result) => {
                     if(err) {
                         return res.status(500).json({
                             message: "An error ocurred while trying to register.",

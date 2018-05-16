@@ -6,24 +6,24 @@ const connection =  require('../database/config');
 
 const gameQuery = "select game.*,\
 a.name AS teamName1,\
-b.name AS teamName2,\
-a.Flag AS teamFlag1,\
-b.Flag AS teamFlag2 \
+b.name AS teamName2, \
+c.name AS winnerName \
 FROM game \
 INNER JOIN teams as a ON a.teamId = game.teamId1 \
 INNER JOIN teams as b ON b.teamId = game.teamId2 \
-WHERE  game.matchId= ? \
+LEFT JOIN teams as c ON c.teamId = game.WinnerId \
+WHERE  game.gameId= ? \
 order by date";
 
 exports.getGames = (req, res, next) => {
     const query = "select game.*,\
     a.name AS teamName1,\
-    b.name AS teamName2,\
-    a.Flag AS teamFlag1,\
-    b.Flag AS teamFlag2\
+    b.name AS teamName2, \
+    c.name AS winnerName \
     FROM game\
     INNER JOIN teams as a ON a.teamId = game.teamId1\
     INNER JOIN teams as b ON b.teamId = game.teamId2\
+    LEFT JOIN teams as c ON c.teamId = game.WinnerId \
     order by date";
     connection.query(query,(err, results, fields) => {
         if(err) {
@@ -44,8 +44,8 @@ exports.getGames = (req, res, next) => {
 };
 
 exports.getGame = (req, res, next) => {
-    const matchId = req.params.matchId;
-    connection.query(gameQuery, [matchId],(err, results, fields) => {
+    const gameId = req.params.gameId;
+    connection.query(gameQuery, [gameId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while rerieving users.",
@@ -66,9 +66,9 @@ exports.getGame = (req, res, next) => {
 exports.setGameScores = (req, res, next) => {
     const scoreTeam1 = req.body.scoreTeam1;
     const scoreTeam2 = req.body.scoreTeam2;
-    const matchId = req.params.matchId;
-    const setScoreQuery = "UPDATE game SET scoreTeam1 = ?, scoreTeam2 = ? WHERE game.matchId = ?";
-    connection.query(setScoreQuery, [scoreTeam1, scoreTeam2, matchId],(err, results, fields) => {
+    const gameId = req.params.gameId;
+    const setScoreQuery = "UPDATE game SET scoreTeam1 = ?, scoreTeam2 = ? WHERE game.gameId = ?";
+    connection.query(setScoreQuery, [scoreTeam1, scoreTeam2, gameId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while setting scores.",
@@ -76,7 +76,7 @@ exports.setGameScores = (req, res, next) => {
             });
         } 
         if(results.affectedRows > 0) {
-            connection.query(gameQuery, [matchId], (err, results, fields) => {
+            connection.query(gameQuery, [gameId], (err, results, fields) => {
                 if(err) {
                     return res.status(500).json({
                         message: "An error ocurred while updating.",
@@ -101,10 +101,10 @@ exports.setGameScores = (req, res, next) => {
 exports.setGameScore = (req, res, next) => {
     const scoreTeamId = 'scoreTeam' + req.params.teamId;
     const score = req.body.score;
-    const matchId = req.params.matchId;
-    const setScoreQuery = "UPDATE game SET  ?? = ? WHERE game.matchId = ?";
+    const gameId = req.params.gameId;
+    const setScoreQuery = "UPDATE game SET  ?? = ? WHERE game.gameId = ?";
     console.log(setScoreQuery);
-    connection.query(setScoreQuery, [scoreTeamId, score, matchId],(err, results, fields) => {
+    connection.query(setScoreQuery, [scoreTeamId, score, gameId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while setting scores.",
@@ -112,7 +112,7 @@ exports.setGameScore = (req, res, next) => {
             });
         } 
         if(results.affectedRows > 0) {
-            connection.query(gameQuery, [matchId], (err, results, fields) => {
+            connection.query(gameQuery, [gameId], (err, results, fields) => {
                 if(err) {
                     return res.status(500).json({
                         message: "An error ocurred while updating.",
@@ -136,9 +136,9 @@ exports.setGameScore = (req, res, next) => {
 
 exports.setWinner = (req, res, next) => {
     const winnerId = req.body.winnerId;
-    const matchId = req.params.matchId;
-    const setScoreQuery = "UPDATE game SET winnerId = ? WHERE game.matchId = ?";
-    connection.query(setScoreQuery, [winnerId, matchId],(err, results, fields) => {
+    const gameId = req.params.gameId;
+    const setScoreQuery = "UPDATE game SET winnerId = ? WHERE game.gameId = ?";
+    connection.query(setScoreQuery, [winnerId, gameId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while setting scores.",
@@ -146,7 +146,7 @@ exports.setWinner = (req, res, next) => {
             });
         } 
         if(results.affectedRows > 0) {
-            connection.query(gameQuery, [matchId], (err, results, fields) => {
+            connection.query(gameQuery, [gameId], (err, results, fields) => {
                 if(err) {
                     return res.status(500).json({
                         message: "An error ocurred while updating.",
