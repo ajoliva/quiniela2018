@@ -9,7 +9,7 @@ exports.checkAuth = jwtValidator({secret: config.auth.JWT_KEY, requestProperty: 
 exports.login = (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
-    connection.query("SELECT email,password,name,activeUser,adminUser FROM users WHERE email = ?", [email], (err, results, fields) => {
+    connection.query("SELECT email,password,name,activeUser,adminUser,userId FROM users WHERE email = ?", [email], (err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "Cannot log in",
