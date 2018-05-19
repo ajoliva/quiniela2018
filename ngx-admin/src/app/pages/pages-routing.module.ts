@@ -4,14 +4,23 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { ProjectionsComponent} from './projections/projections.component'
 
-const routes: Routes = [{
+import { AuthGuard } from '../pages/services/auth/auth.guard.component';
+
+const routes: Routes = [
+  
+  {
   path: '',
   component: PagesComponent,
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate:[AuthGuard]
   }, {
+    path: 'projections',
+    component:ProjectionsComponent,
+  }, /* {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
@@ -35,7 +44,7 @@ const routes: Routes = [{
   }, {
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
-  }, {
+  }, */ {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
