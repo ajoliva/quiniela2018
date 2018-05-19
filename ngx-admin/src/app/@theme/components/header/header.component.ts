@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
+import { AuthenticationService } from '../../../pages/services/auth/auth.service';
 
 @Component({
   selector: 'ngx-header',
@@ -16,13 +17,23 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Log out' }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService,
+              private authService: AuthenticationService) {
+
+
+                menuService.onItemClick().subscribe(data=>{
+                  console.log(data);
+                  if(data.item.title === 'Log out'){
+                    this.authService.logout();
+                  }
+                })
   }
+
 
   ngOnInit() {
     this.userService.getUsers()
@@ -46,4 +57,6 @@ export class HeaderComponent implements OnInit {
   startSearch() {
     this.analyticsService.trackEvent('startSearch');
   }
+
+  
 }
