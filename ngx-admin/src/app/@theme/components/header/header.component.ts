@@ -17,7 +17,10 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
+  userName:any;
+
   userMenu = [{ title: 'Log out' }];
+  userPicture = '../../../../assets/images/avatar.png'
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -32,6 +35,8 @@ export class HeaderComponent implements OnInit {
                     this.authService.logout();
                   }
                 })
+
+                this.userName= this.authService.name;
   }
 
 
