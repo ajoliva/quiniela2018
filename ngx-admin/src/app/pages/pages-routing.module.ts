@@ -13,13 +13,15 @@ const routes: Routes = [
   {
   path: '',
   component: PagesComponent,
-  children: [{
+  children: [
+    /* {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate:[AuthGuard]
-  }, {
+  }, */ {
     path: 'projections',
     component:ProjectionsComponent,
+    canActivate:[AuthGuard]
   }, /* {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
@@ -46,7 +48,7 @@ const routes: Routes = [
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
   }, */ {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'projections',
     pathMatch: 'full',
   }, {
     path: '**',

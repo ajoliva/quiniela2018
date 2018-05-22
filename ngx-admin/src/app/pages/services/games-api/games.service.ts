@@ -6,15 +6,26 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '../auth/auth.service'
 
 
 
 @Injectable()
-export class RegisterService {
+export class GamesService {
     
     constructor(private http:Http,
-    private router: Router){
+    private router: Router,private authenticationService:AuthenticationService){
        
+    }
+
+    parseDate(str){
+        let date = new Date();
+        try {
+            let date = new Date(str);  
+        } catch (error) {
+            return null;
+        }
+        return date.toISOString().substr(0, 19).replace('T', ' ');
     }
 
     handleError (error: Response | any,obj) {
@@ -34,19 +45,48 @@ export class RegisterService {
     }
 
 
-    register(username,email,password){
-        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        let body = `username=${username}&password=${password}&email=${email}`;
+    getPredictions(userId){
+
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear});
         let options = new RequestOptions({headers:headers});
-        return this.http.post('/api/users/register',body,options)
-            .map(res => {
-
-                
-                this.router.navigate(['/login'])
-
-            })
+        return this.http.get('/api/predictions/user/'+userId,options)
+            .map(res => res.json()).catch(this.handleError);
     }
 
-    
+    getGames(){
 
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear});
+        let options = new RequestOptions({headers:headers});
+        return this.http.get('/api/games/gamelist',options)
+            .map(res => res.json()).catch(this.handleError);
+    }
+
+    setGameScores(gameId,scoreTeam1,scoreTeam2){
+        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam1}`;
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear});
+        let options = new RequestOptions({headers:headers});
+        return this.http.patch('/api/games/'+gameId+'/scores',body,options)
+            .map(res => res.json()).catch(this.handleError);
+    }
+
+    setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate){
+        console.log('date service:',date)
+        if(scoreTeam1>=scoreTeam2){
+            winnerId=scoreTeam1;
+        }else{
+            winnerId=scoreTeam2;
+        }
+        date = this.parseDate(date);
+        predictionDate = this.parseDate(predictionDate);
+        let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam1}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
+        
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
+        let options = new RequestOptions({headers:headers});
+        return this.http.post('/api/predictions/',body,options)
+            .map(res => res.json()).catch(this.handleError);
+    }
 }

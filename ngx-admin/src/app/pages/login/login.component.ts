@@ -47,7 +47,7 @@ export class LoginComponent {
         if (result === true) {
           // login successful
           console.log('success on login');
-          this.router.navigate(['/pages/dashboard']);
+          this.router.navigate(['/pages/projections']);
         } else {
           // login failed
           this.error = 'Usuario o contraseña son incorrectos.';
