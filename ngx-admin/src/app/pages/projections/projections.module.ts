@@ -6,6 +6,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 
 import {ProjectionsComponent} from './projections.component';
 
+import {EditModalComponent} from './edit-modal/edit-modal.component'
 
 
 @NgModule({
@@ -14,7 +15,11 @@ import {ProjectionsComponent} from './projections.component';
     NgxEchartsModule,
   ],
   declarations: [
-    ProjectionsComponent
+    ProjectionsComponent,
+    EditModalComponent
   ],
+  entryComponents:[
+    EditModalComponent
+  ]
 })
 export class ProjectionsModule { }
