@@ -26,6 +26,7 @@ exports.getGames = (req, res, next) => {
     LEFT JOIN teams as c ON c.teamId = game.WinnerId \
     order by date";
     connection.query(query,(err, results, fields) => {
+        console.log(results.length);
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while rerieving users.",

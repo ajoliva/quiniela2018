@@ -111,20 +111,22 @@ exports.setPrediction = (req, res, next) => {
     const fields = [
         'userId',
         'gameId', 
-        'date', 
+        'GameDate',
+        'PredictionDate', 
         'teamId1',
         'scoreTeam1',
         'teamId2',
         'scoreTeam2',
         'WinnerId'
     ];
-    const query = "insert into prediction (??) values (?, ?,?, ?, ?, ?,?,?)";
+    const query = "insert into prediction (??) values (?, ?,?, ?, ?, ?,?,?,?)";
     connection.query(query, 
         [
             fields, 
             req.body.userId,
             req.body.gameId,
-            req.body.date,
+            req.body.GameDate,
+            req.body.PredictionDate,
             req.body.teamId1,
             req.body.scoreTeam1,
             req.body.teamId2,
