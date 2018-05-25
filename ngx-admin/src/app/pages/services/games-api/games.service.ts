@@ -25,7 +25,14 @@ export class GamesService {
         } catch (error) {
             return null;
         }
-        return date.toISOString().substr(0, 19).replace('T', ' ');
+
+        let year = date.getFullYear();
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2)
+        let hour = ("0" + date.getHours()).slice(-2);
+        let min = ("0" + date.getMinutes()).slice(-2);
+
+        return `${year}-${month}-${day} ${hour}:${min}:00`;
     }
 
     handleError (error: Response | any,obj) {
@@ -73,7 +80,7 @@ export class GamesService {
     }
 
     setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate){
-        console.log('date service:',date)
+        
         if(scoreTeam1>=scoreTeam2){
             winnerId=scoreTeam1;
         }else{
@@ -87,6 +94,23 @@ export class GamesService {
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers:headers});
         return this.http.post('/api/predictions/',body,options)
+            .map(res => res.json()).catch(this.handleError);
+    }
+
+    updatePrediction(scoreTeam1,scoreTeam2,winnerId,predictionId,date){
+        
+        if(scoreTeam1>=scoreTeam2){
+            winnerId=scoreTeam1;
+        }else{
+            winnerId=scoreTeam2;
+        }
+        date = this.parseDate(date);
+        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&winnerId=${winnerId}`;
+        
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
+        let options = new RequestOptions({headers:headers});
+        return this.http.patch('/api/predictions/'+predictionId,body,options)
             .map(res => res.json()).catch(this.handleError);
     }
 }

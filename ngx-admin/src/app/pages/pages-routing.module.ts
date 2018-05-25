@@ -7,6 +7,7 @@ import { NotFoundComponent } from './miscellaneous/not-found/not-found.component
 import { ProjectionsComponent} from './projections/projections.component'
 
 import { AuthGuard } from '../pages/services/auth/auth.guard.component';
+import { UserPredictionsComponent } from './user-predictions/user-predictions.component';
 
 const routes: Routes = [
   
@@ -21,6 +22,11 @@ const routes: Routes = [
   }, */ {
     path: 'projections',
     component:ProjectionsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'predictions',
+    component:UserPredictionsComponent,
     canActivate:[AuthGuard]
   }, /* {
     path: 'ui-features',

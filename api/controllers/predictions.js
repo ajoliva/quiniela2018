@@ -107,7 +107,7 @@ exports.setPrediction = (req, res, next) => {
     const date = req.body.date;
     const teamId1 = req.body.teamId1;
     const teamId2 = req.body.teamId2;
-
+    console.log('set prediction: GameDate: '+req.body.GameDate+' PredictionDate: '+req.body.PredictionDate)
     const fields = [
         'userId',
         'gameId', 
@@ -152,7 +152,7 @@ exports.updatePrediction = (req, res, next) => {
     const scoreTeam2 = req.body.scoreTeam2;
     const winnerId = req.body.winnerId;
     const predictionId = req.params.predictionId;
-    const setScoreQuery = "UPDATE game SET  scoreTeam1= ?. scoreTeam2=?, winnerId=? WHERE prediction.predictionId=?";
+    const setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=? WHERE predictionId=?";
     console.log(setScoreQuery);
     connection.query(setScoreQuery, [scoreTeam1, scoreTeam2, winnerId, predictionId],(err, results, fields) => {
         if(err) {
@@ -160,25 +160,9 @@ exports.updatePrediction = (req, res, next) => {
                 message: "An error ocurred while setting scores.",
                 error: err
             });
-        } 
-        if(results.affectedRows > 0) {
-            connection.query(predictionByIdQuery, [predictionId], (err, results, fields) => {
-                if(err) {
-                    return res.status(500).json({
-                        message: "An error ocurred while updating.",
-                        error: err
-                    });
-                } else {
-                    if(results.length > 0) {
-                        return res.status(201).json({
-                            results: results
-                        });
-                    }
-                }
-            });
         } else {
             return res.status(200).json({
-                message: "no changes applied"
+                message: "applied"
             });
         } 
     });

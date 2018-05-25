@@ -52,7 +52,7 @@ exports.registerUser = (req, res, next) => {
                         error: err
                     });
                 }
-                connection.query("INSERT INTO users (name, email, password,activeUser,adminUser) VALUES (?,?,?,0,1)", [username, email, hash], (err, result) => {
+                connection.query("INSERT INTO users (name, email, password,activeUser,adminUser) VALUES (?,?,?,0,0)", [username, email, hash], (err, result) => {
                     if(err) {
                         return res.status(500).json({
                             message: "An error ocurred while trying to register.",

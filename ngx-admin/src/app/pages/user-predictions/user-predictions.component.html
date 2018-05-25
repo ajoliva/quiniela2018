@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <nb-card>
-        <nb-card-header>Todos los Partidos</nb-card-header>
+        <nb-card-header>Predicciones Ingresadas</nb-card-header>
         <nb-card-body>
             <table class="table table-hover table-sm">
                 <thead class="thead-light">
@@ -11,26 +11,20 @@
                     <th scope="col">Equipo B</th>
                     <th scope="col">Marcador Equipo A</th>
                     <th scope="col">Marcador Equipo B</th>
-                    <th scope="col">Ciudad</th>
-                    <th scope="col">Estadio</th>
-                    <th scope="col">Grupo</th>
                     <th scope="col">Ganador</th>
-                    <th scope="col">Agregar predicción</th>
+                    <th scope="col">Acción</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor= "let game of games">
+                  <tr *ngFor= "let game of predictions">
                     <td>{{game.dateLocal}}</td>
                     <td>{{game.teamName1}}</td>
                     <td>{{game.teamName2}}</td>
                     <td>{{game.scoreTeam1}}</td>
                     <td>{{game.scoreTeam2}}</td>
-                    <td>{{game.City}}</td>
-                    <td>{{game.Stadium}}</td>
-                    <td>{{game.Grupo}}</td>
                     <td>{{game.winnerName}}</td>
                     <td>
-                        <button (click)="setProjection(game.gameId,game.teamName1,game.teamName2,game.teamId1,game.teamId2,game.date)" class="btn btn-primary btn-icon" type="button">
+                        <button (click)="updateProjection(game.scoreTeam1,game.scoreTeam2,game.winnerId,game.predictionId,game.teamName1,game.teamName2)" class="btn btn-primary btn-icon" type="button">
                           <i class="nb-compose" ></i>
                         </button>
                     </td>

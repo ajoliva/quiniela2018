@@ -8,14 +8,14 @@ import {EditModalComponent} from './edit-modal/edit-modal.component';
 @Component({
   selector: 'ngx-projections',
   styleUrls: [],
-  templateUrl: './projections.component.html',
+  templateUrl: './user-predictions.component.html',
   providers: [GamesService]
 })
-export class ProjectionsComponent  {
+export class UserPredictionsComponent  {
 
   private userId:any;
   public rows:any;
-  public games:any;
+  public predictions:any;
 
   constructor(private gamesService:GamesService,private authenticationService:AuthenticationService,private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
@@ -24,17 +24,15 @@ export class ProjectionsComponent  {
   }
 
   getGames(userId){
-    this.gamesService.getGames().subscribe(data=>{
+    this.gamesService.getPredictions(userId).subscribe(data=>{
       console.log(data.results)
       let tempDate;
       data.results.forEach(element => {
-        tempDate = new Date(element.date);
+        tempDate = new Date(element.GameDate);
         element.dateLocal=tempDate.toLocaleDateString("es-GT");
       });
 
-      this.games=data.results;
-      
-
+      this.predictions=data.results;
     })
   }
   
@@ -51,17 +49,19 @@ export class ProjectionsComponent  {
   }
 
 
-  setProjection(gameId,team1,team2,teamId1,teamId2,date) {
+  updateProjection(scoreTeam1,scoreTeam2,winnerId,predictionId,teamName1,teamName2) {
     const activeModal = this.modalService.open(EditModalComponent, { size: 'sm', container: 'nb-layout' });
-    console.log('set projection date:',date);
-    activeModal.componentInstance.modalHeader = 'Ingresa tu Predicción';
-    activeModal.componentInstance.gameId = gameId;
-    activeModal.componentInstance.team1 = team1;
-    activeModal.componentInstance.team2 = team2;
-    activeModal.componentInstance.teamId1 = teamId1;
-    activeModal.componentInstance.teamId2 = teamId2;
-    activeModal.componentInstance.date = date;
+    
+    activeModal.componentInstance.modalHeader = 'Cámbia tu Predicción';
+    activeModal.componentInstance.scoreTeam1 = scoreTeam1;
+    activeModal.componentInstance.scoreTeam2 = scoreTeam2;
+    activeModal.componentInstance.predictionId = predictionId;
+    activeModal.componentInstance.winnerId = winnerId;
+    activeModal.componentInstance.teamName1 = teamName1;
+    activeModal.componentInstance.teamName2 = teamName2;
     activeModal.componentInstance.userId = this.userId;
-    activeModal.componentInstance.predictionDate = (new Date());
+    activeModal.componentInstance.model.scoreTeam1 = scoreTeam1;
+    activeModal.componentInstance.model.scoreTeam2 = scoreTeam2;
+    
   }
 }

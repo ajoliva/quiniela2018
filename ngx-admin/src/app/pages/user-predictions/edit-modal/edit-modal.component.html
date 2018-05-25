@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updatePrediction()" class="form-vertical">
+
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 control-label">{{teamName1}}</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="scoreTeam1" [(ngModel)]="model.scoreTeam1" #username="ngModel" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 control-label">{{teamName2}}</label>
+
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="scoreTeam2" [(ngModel)]="model.scoreTeam2" #username="ngModel" required />
+            </div>
+        </div>
+        <!-- <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-info ">Ingresar</button>
+            </div>
+        </div> -->
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-md btn-success" (click)="updatePrediction()">Guardar</button>
+  </div>

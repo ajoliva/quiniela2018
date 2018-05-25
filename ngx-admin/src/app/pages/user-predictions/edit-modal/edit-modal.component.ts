@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {GamesService} from '../../services/games-api/games.service'
 
-
 @Component({
   selector: 'ngx-modal',
   templateUrl: './edit-modal.component.html',
@@ -17,11 +16,10 @@ export class EditModalComponent {
     public gameId:any;
   public scoreTeam1:any;
   public scoreTeam2:any;
-  public team1:any;
-  public team2:any;
-  public teamId1:any;
-  public teamId2:any;
-  public predictionDate:any;
+  public predictionId:any;
+  public teamName1:any;
+  public teamName2:any;
+  public winnerId:any;
   public date:any;
   public userId:any;
   public model: any = {};
@@ -30,15 +28,14 @@ export class EditModalComponent {
   constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) { }
 
 
-  setPrediction(){
+  updatePrediction(){
       
       if(this.model){
         console.log('ready to set score!',this.userId);
         
-        this.gamesService.setPrediction(this.gameId,this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.date,this.userId,null,this.gamesService.parseDate(this.predictionDate)).subscribe(data=>{
-            
+        this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date())).subscribe(data=>{
+            console.log('setGameScores:',data);
             this.closeModal();
-            
         })
       }
   }

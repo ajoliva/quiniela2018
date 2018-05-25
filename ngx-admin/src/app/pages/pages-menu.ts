@@ -11,6 +11,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/projections',
     home: true,
   },
+  {
+    title: 'Predicciones',
+    icon: 'nb-compose',
+    link: '/pages/predictions',
+    home: true,
+  },
   /* ,
   {
     title: 'UI Features',
