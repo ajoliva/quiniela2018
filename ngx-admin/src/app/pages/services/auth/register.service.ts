@@ -34,9 +34,9 @@ export class RegisterService {
     }
 
 
-    register(username,email,password){
+    register(name,username,email,password){
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        let body = `username=${username}&password=${password}&email=${email}`;
+        let body = `name=${name}&username=${username}&password=${password}&email=${email}`;
         let options = new RequestOptions({headers:headers});
         return this.http.post('/api/users/register',body,options)
             .map(res => {

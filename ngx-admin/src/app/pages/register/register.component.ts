@@ -42,11 +42,8 @@ export class RegisterComponent {
 
     
 
-     this.registerService.register(this.model.username,this.model.email, this.model.password)
+     this.registerService.register(this.model.name,this.model.username,this.model.email, this.model.password)
       .subscribe(result => {
-
-
-
 
         console.log("Successfull Registration!",result);
         this.router.navigate(['/login']);

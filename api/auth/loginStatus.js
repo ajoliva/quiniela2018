@@ -9,7 +9,7 @@ exports.checkAuth = jwtValidator({secret: config.auth.JWT_KEY, requestProperty: 
 exports.login = (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
-    connection.query("SELECT username,email,password,name,activeUser,adminUser FROM users WHERE username = ?", [username], (err, results, fields) => {
+    connection.query("SELECT username,email,password,name,activeUser,adminUser,userId FROM users WHERE username = ?", [username], (err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "Cannot log in",
@@ -27,6 +27,7 @@ exports.login = (req, res, next) => {
             const storedName = results[0].name;
             const isActive = results[0].activeUser;
             const isAdmin = results[0].adminUser;
+            const userId = results[0].userId;
             bcrypt.compare(password, storedPwd, (err, result) => {
                 if(err) {
                     return res.status(401).json({
@@ -50,7 +51,12 @@ exports.login = (req, res, next) => {
                     );
                     return res.status(200).json({
                         message: 'auth successful',
-                        token: token
+                        token: token,
+                        name:storedName,
+                        email:storedEmail,
+                        userId:userId,
+                        isAdmin:isAdmin,
+                        isActive:isActive
                     });
                 }
                 return res.status(401).json({

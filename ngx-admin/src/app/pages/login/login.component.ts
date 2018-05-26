@@ -46,7 +46,7 @@ export class LoginComponent {
       .subscribe(result => {
         if (result === true) {
           // login successful
-          console.log('success on login');
+          
           this.router.navigate(['/pages/projections']);
         } else {
           // login failed

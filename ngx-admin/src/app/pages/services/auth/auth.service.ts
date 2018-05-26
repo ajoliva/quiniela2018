@@ -27,7 +27,7 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string): Observable<boolean> {
-        let body = `email=${email}&password=${password}`;
+        let body = `username=${email}&password=${password}`;
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
         return this.http.post('/api/users/login', body, { headers: headers })
             .map((response: Response) => {
@@ -49,12 +49,14 @@ export class AuthenticationService {
                     this.isActive = isActive;
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify({ username: email, token: token, name:name,userId:userId,isAdmin:isAdmin,isActive:isActive }));
-                    
+                    console.log('success login');
                     // return true to indicate successful login
                     return true;
                 } else {
                     // return false to indicate failed login
+                    console.log('bad login');
                     return false;
+                   
                 }
             });
     }
