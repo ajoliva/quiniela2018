@@ -29,9 +29,10 @@ const userFields = [
  */
 exports.registerUser = (req, res, next) => {
     let username = req.body.username;
+    let name  = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
-    connection.query("SELECT email,password FROM users WHERE email = ?", [email], (err, results, fields) => {
+    connection.query("SELECT username,email,name,password FROM users WHERE username = ?", [username], (err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "Cannot register user.",
@@ -41,7 +42,7 @@ exports.registerUser = (req, res, next) => {
         //console.log(results.length);
         if(results.length > 0 ) {
             return res.status(409).json({
-                message: "E-Mail already in use."
+                message: "User already registered."
             });
         } else {
             bcrypt.hash(password, 10, (err, hash) => {
@@ -52,7 +53,7 @@ exports.registerUser = (req, res, next) => {
                         error: err
                     });
                 }
-                connection.query("INSERT INTO users (name, email, password,activeUser,adminUser) VALUES (?,?,?,0,0)", [username, email, hash], (err, result) => {
+                connection.query("INSERT INTO users (username,name, email, password,activeUser,adminUser) VALUES (?,?,?,?,0,0)", [username, name, email, hash], (err, result) => {
                     if(err) {
                         return res.status(500).json({
                             message: "An error ocurred while trying to register.",
