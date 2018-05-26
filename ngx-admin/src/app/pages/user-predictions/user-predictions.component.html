@@ -8,9 +8,9 @@
                   <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Equipo A</th>
-                    <th scope="col">Equipo B</th>
                     <th scope="col">Marcador Equipo A</th>
                     <th scope="col">Marcador Equipo B</th>
+                    <th scope="col">Equipo B</th>
                     <th scope="col">Ganador</th>
                     <th scope="col">Acción</th>
                   </tr>
@@ -19,9 +19,9 @@
                   <tr *ngFor= "let game of predictions">
                     <td>{{game.dateLocal}}</td>
                     <td>{{game.teamName1}}</td>
-                    <td>{{game.teamName2}}</td>
                     <td>{{game.scoreTeam1}}</td>
                     <td>{{game.scoreTeam2}}</td>
+                    <td>{{game.teamName2}}</td>
                     <td>{{game.winnerName}}</td>
                     <td>
                         <button (click)="updateProjection(game.scoreTeam1,game.scoreTeam2,game.winnerId,game.predictionId,game.teamName1,game.teamName2)" class="btn btn-primary btn-icon" type="button">

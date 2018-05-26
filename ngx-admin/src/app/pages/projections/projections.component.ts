@@ -52,7 +52,7 @@ export class ProjectionsComponent  {
 
 
   setProjection(gameId,team1,team2,teamId1,teamId2,date) {
-    const activeModal = this.modalService.open(EditModalComponent, { size: 'sm', container: 'nb-layout' });
+    const activeModal = this.modalService.open(EditModalComponent, { size: 'lg', container: 'nb-layout' });
     console.log('set projection date:',date);
     activeModal.componentInstance.modalHeader = 'Ingresa tu Predicción';
     activeModal.componentInstance.gameId = gameId;

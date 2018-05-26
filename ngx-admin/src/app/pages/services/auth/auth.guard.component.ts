@@ -13,9 +13,11 @@ export class AuthGuard implements CanActivate {
         let user:any;
         if (localStorage.getItem('currentUser')) {
             user=JSON.parse(localStorage.getItem('currentUser'));
+            if(user.isActive===1){
+                return true
+            }
             
-            
-            return true;
+            return false;
         }
  
         // not logged in so redirect to login page

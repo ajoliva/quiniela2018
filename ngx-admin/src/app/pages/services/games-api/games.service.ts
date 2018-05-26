@@ -88,7 +88,7 @@ export class GamesService {
         }
         date = this.parseDate(date);
         predictionDate = this.parseDate(predictionDate);
-        let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam1}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
+        let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
         
         let barear=`Bearer ${this.authenticationService.token}`
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});

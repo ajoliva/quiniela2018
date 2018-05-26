@@ -8,9 +8,10 @@
                   <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Equipo A</th>
-                    <th scope="col">Equipo B</th>
+                    
                     <th scope="col">Marcador Equipo A</th>
                     <th scope="col">Marcador Equipo B</th>
+                    <th scope="col">Equipo B</th>
                     <th scope="col">Ciudad</th>
                     <th scope="col">Estadio</th>
                     <th scope="col">Grupo</th>
@@ -22,9 +23,10 @@
                   <tr *ngFor= "let game of games">
                     <td>{{game.dateLocal}}</td>
                     <td>{{game.teamName1}}</td>
-                    <td>{{game.teamName2}}</td>
+                    
                     <td>{{game.scoreTeam1}}</td>
                     <td>{{game.scoreTeam2}}</td>
+                    <td>{{game.teamName2}}</td>
                     <td>{{game.City}}</td>
                     <td>{{game.Stadium}}</td>
                     <td>{{game.Grupo}}</td>

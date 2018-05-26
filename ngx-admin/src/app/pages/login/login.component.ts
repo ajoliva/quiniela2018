@@ -12,7 +12,7 @@ export class LoginComponent {
   public email: any;
   public password: any;
   public submitted: boolean = false;
-  public error = '';
+  public error:any;
   model: any = {};
 
 
@@ -50,7 +50,7 @@ export class LoginComponent {
           this.router.navigate(['/pages/projections']);
         } else {
           // login failed
-          this.error = 'Usuario o contraseña son incorrectos.';
+          this.error = 'Usuario o contraseña son incorrectos. Tu usuario puede aún no estar activado.';
 
         }
       }); 
