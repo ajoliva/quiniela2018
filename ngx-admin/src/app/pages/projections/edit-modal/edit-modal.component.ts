@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {GamesService} from '../../services/games-api/games.service'
+import { GamesService } from '../../services/games-api/games.service'
 
 
 @Component({
   selector: 'ngx-modal',
   templateUrl: './edit-modal.component.html',
-  providers:[ GamesService]
+  providers: [GamesService]
 })
 export class EditModalComponent {
 
@@ -14,33 +14,42 @@ export class EditModalComponent {
   modalContent = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
     nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
     nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.`;
-    public gameId:any;
-  public scoreTeam1:any;
-  public scoreTeam2:any;
-  public team1:any;
-  public team2:any;
-  public teamId1:any;
-  public teamId2:any;
-  public predictionDate:any;
-  public date:any;
-  public userId:any;
+  public gameId: any;
+  public scoreTeam1: any;
+  public scoreTeam2: any;
+  public team1: any;
+  public team2: any;
+  public teamId1: any;
+  public teamId2: any;
+  public predictionDate: any;
+  public date: any;
+  public userId: any;
   public model: any = {};
-  public error:any;
+  public error: any;
 
-  constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) { }
+  constructor(private activeModal: NgbActiveModal, private gamesService: GamesService) { }
 
 
-  setPrediction(){
+  setPrediction() {
+
+    if (this.model) {
       
-      if(this.model){
-        console.log('ready to set score!',this.userId);
+      this.date = new Date(this.date);
+
+      console.log(`modal: gameDate:${this.date} predictionDate:${this.predictionDate}`);
+           
+      this.gamesService.setPrediction(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2, this.teamId1, this.teamId2, this.date, this.userId, null, this.gamesService.parseDate(this.predictionDate)).subscribe(data => {
+
         
-        this.gamesService.setPrediction(this.gameId,this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.date,this.userId,null,this.gamesService.parseDate(this.predictionDate)).subscribe(data=>{
-            
-            this.closeModal();
-            
-        })
-      }
+
+
+        this.closeModal();
+
+
+      }, err => {
+        this.error = "No es posible agregar predicción o ya se agregó antes."
+      })
+    }
   }
 
   closeModal() {

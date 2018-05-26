@@ -19,12 +19,10 @@ export class GamesService {
     }
 
     parseDate(str){
-        let date = new Date();
-        try {
+        
+        
             let date = new Date(str);  
-        } catch (error) {
-            return null;
-        }
+       
 
         let year = date.getFullYear();
         let day = ("0" + date.getDate()).slice(-2);
@@ -88,6 +86,8 @@ export class GamesService {
         }
         date = this.parseDate(date);
         predictionDate = this.parseDate(predictionDate);
+
+        console.log(` set prediction: gameDate:${date} predictionDate:${predictionDate}`);
         let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
         
         let barear=`Bearer ${this.authenticationService.token}`

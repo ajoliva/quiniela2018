@@ -28,7 +28,7 @@ export class UserPredictionsComponent  {
       console.log(data.results)
       let tempDate;
       data.results.forEach(element => {
-        tempDate = new Date(element.GameDate);
+        tempDate = new Date(element.PredictionDate);
         element.dateLocal=tempDate.toLocaleDateString("es-GT");
       });
 
@@ -42,11 +42,6 @@ export class UserPredictionsComponent  {
     this.getGames(this.userId);
   }
 
-
-  parseDate(date){
-    
-    return "hola";
-  }
 
 
   updateProjection(scoreTeam1,scoreTeam2,winnerId,predictionId,teamName1,teamName2) {
