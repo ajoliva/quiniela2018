@@ -15,7 +15,6 @@ const userFields = [
     'pointsfase3',
     'pointsfase4',
     'pointsfase5',
-    'totalpoints',
     'activeUser',
     'adminUser'
 ];
@@ -72,7 +71,11 @@ exports.registerUser = (req, res, next) => {
 }
 
 exports.getUsers = (req, res, next) => {
-    const query = "SELECT ?? FROM users";
+    const orderByPoints = req.query.orderbypoints;
+    let query = "SELECT ?? FROM users";
+    if(orderByPoints === 'true') {
+        query += ' order by totalpoints desc';
+    }
     connection.query(query, [userFields], (err, results, fields) => {
         if(err) {
             return res.status(500).json({
