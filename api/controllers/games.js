@@ -168,3 +168,36 @@ exports.setWinner = (req, res, next) => {
         } 
     });
 };
+
+exports.setAsFinished = (req, res, next) => {
+    const gameId = req.params.gameId;
+    const setScoreQuery = "UPDATE game SET Finished = 1 WHERE game.gameId = ?";
+    connection.query(setScoreQuery, [gameId],(err, results, fields) => {
+        if(err) {
+            return res.status(500).json({
+                message: "An error ocurred while setting changes.",
+                error: err
+            });
+        } 
+        if(results.affectedRows > 0) {
+            connection.query(gameQuery, [gameId], (err, results, fields) => {
+                if(err) {
+                    return res.status(500).json({
+                        message: "An error ocurred while updating.",
+                        error: err
+                    });
+                } else {
+                    if(results.length > 0) {
+                        return res.status(201).json({
+                            results: results
+                        });
+                    }
+                }
+            });
+        } else {
+            return res.status(200).json({
+                message: "no changes applied"
+            });
+        } 
+    });
+};

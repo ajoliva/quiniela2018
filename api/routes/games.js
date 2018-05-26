@@ -11,5 +11,6 @@ router.get("/:gameId", AuthController.checkAuth, GamesController.getGame);
 router.patch("/:gameId/scores", GamesController.setGameScores);
 router.patch("/:gameId/score/:teamId", GamesController.setGameScore);
 router.patch("/:gameId/winner", GamesController.setWinner);
+router.patch("/:gameId/finished", GamesController.setAsFinished);
 
 module.exports = router;
