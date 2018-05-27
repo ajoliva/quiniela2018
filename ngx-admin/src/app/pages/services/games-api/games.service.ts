@@ -79,10 +79,12 @@ export class GamesService {
 
     setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate){
         
-        if(scoreTeam1>=scoreTeam2){
+        if(scoreTeam1>scoreTeam2){
             winnerId=scoreTeam1;
-        }else{
+        }else if(scoreTeam1<scoreTeam2){
             winnerId=scoreTeam2;
+        }else{
+            winnerId=33;
         }
         date = this.parseDate(date);
         predictionDate = this.parseDate(predictionDate);
@@ -99,10 +101,12 @@ export class GamesService {
 
     updatePrediction(scoreTeam1,scoreTeam2,winnerId,predictionId,date){
         
-        if(scoreTeam1>=scoreTeam2){
+        if(scoreTeam1>scoreTeam2){
             winnerId=scoreTeam1;
-        }else{
+        }else if(scoreTeam1<scoreTeam2){
             winnerId=scoreTeam2;
+        }else{
+            winnerId=33;
         }
         date = this.parseDate(date);
         let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&winnerId=${winnerId}`;
