@@ -1,11 +1,11 @@
 {
     "app": {
-        "PORT": 3000
+        "PORT": 80
     },
     "db": {
         "DATABASE": "quiniela",
-        "USER": "admin",
-        "PASSWORD": "admin",
+        "USER": "root",
+        "PASSWORD": "quiniela_root",
         "HOST": "localhost"
     },
     "auth": {
