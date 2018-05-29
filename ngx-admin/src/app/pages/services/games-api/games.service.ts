@@ -12,17 +12,17 @@ import {AuthenticationService} from '../auth/auth.service'
 
 @Injectable()
 export class GamesService {
-    
+
     constructor(private http:Http,
     private router: Router,private authenticationService:AuthenticationService){
-       
+
     }
 
     parseDate(str){
-        
-        
-            let date = new Date(str);  
-       
+
+
+            let date = new Date(str);
+
 
         let year = date.getFullYear();
         let day = ("0" + date.getDate()).slice(-2);
@@ -35,7 +35,7 @@ export class GamesService {
 
     handleError (error: Response | any,obj) {
         let errMsg: string;
-        
+
         if (error instanceof Response) {
             const body = error.json() || '';
             const err = body.error || JSON.stringify(body);
@@ -78,11 +78,11 @@ export class GamesService {
     }
 
     setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate){
-        
+
         if(scoreTeam1>scoreTeam2){
-            winnerId=scoreTeam1;
+            winnerId=teamId1;
         }else if(scoreTeam1<scoreTeam2){
-            winnerId=scoreTeam2;
+            winnerId=teamId2;
         }else{
             winnerId=33;
         }
@@ -91,7 +91,7 @@ export class GamesService {
 
         console.log(` set prediction: gameDate:${date} predictionDate:${predictionDate}`);
         let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
-        
+
         let barear=`Bearer ${this.authenticationService.token}`
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers:headers});
@@ -100,7 +100,7 @@ export class GamesService {
     }
 
     updatePrediction(scoreTeam1,scoreTeam2,winnerId,predictionId,date){
-        
+
         if(scoreTeam1>scoreTeam2){
             winnerId=scoreTeam1;
         }else if(scoreTeam1<scoreTeam2){
@@ -110,7 +110,7 @@ export class GamesService {
         }
         date = this.parseDate(date);
         let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&winnerId=${winnerId}`;
-        
+
         let barear=`Bearer ${this.authenticationService.token}`
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers:headers});
