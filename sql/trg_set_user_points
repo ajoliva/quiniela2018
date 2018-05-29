@@ -1,0 +1,33 @@
+CREATE TRIGGER `trg_set_user_points` AFTER UPDATE ON `prediction`
+ FOR EACH ROW begin
+
+DECLARE FASE Int;
+
+Select game.Fase INTO FASE FROM game where gameid=new.gameId;
+
+IF  new.Points<>0 And old.Points=0 and FASE=1 THEN
+	Update users SET pointsfase1= pointsfase1 + new.Points where  userId=new.userId;
+	Update users SET totalpoints= totalpoints + new.Points where  userId=new.userId;
+END IF;
+
+IF  new.Points<>0 And old.Points=0 and FASE=2 THEN
+	Update users SET pointsfase2= pointsfase2 + new.Points where  userId=new.userId;
+	Update users SET totalpoints= totalpoints + new.Points where  userId=new.userId;
+END IF;
+
+IF  new.Points<>0 And old.Points=0 and FASE=3 THEN
+	Update users SET pointsfase3= pointsfase3 + new.Points where  userId=new.userId;
+	Update users SET totalpoints= totalpoints + new.Points where  userId=new.userId;
+END IF;
+
+IF  new.Points<>0 And old.Points=0 and FASE=4 THEN
+	Update users SET pointsfase4= pointsfase4 + new.Points where  userId=new.userId;
+	Update users SET totalpoints= totalpoints + new.Points where  userId=new.userId;
+END IF;
+
+IF  new.Points<>0 And old.Points=0 and FASE=5 THEN
+	Update users SET pointsfase5= pointsfase5 + new.Points where  userId=new.userId;
+	Update users SET totalpoints= totalpoints + new.Points where  userId=new.userId;
+END IF;
+
+end
