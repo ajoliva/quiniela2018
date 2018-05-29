@@ -1,3 +1,5 @@
+drop trigger if exists trg_chkUpdate;
+
 CREATE TRIGGER `trg_chkUpdate` BEFORE UPDATE ON `prediction`
  FOR EACH ROW begin
 declare msg varchar(255);
