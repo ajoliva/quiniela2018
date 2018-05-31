@@ -49,8 +49,8 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`gameId`, `date`, `teamId1`, `scoreTeam1`, `teamId2`, `scoreTeam2`, `WinnerId`, `QualifyId`, `City`, `Stadium`, `Finished`, `Grupo`, `Fase`) VALUES
-(1, '2018-06-14 09:00:00', 1, 2, 2, 1, 1, NULL, 'Moscu', 'Luzhniki', 1, 'A', 1),
-(2, '2018-06-15 06:00:00', 3, 0, 4, 0, 33, NULL, 'Ekaterimburgo', 'Ekaterimburgo', 1, 'A', 1),
+(1, '2018-06-14 09:00:00', 1, 0, 2, 0, NULL, NULL, 'Moscu', 'Luzhniki', 0, 'A', 1),
+(2, '2018-06-15 06:00:00', 3, 0, 4, 0, NULL, NULL, 'Ekaterimburgo', 'Ekaterimburgo', 0, 'A', 1),
 (3, '2018-06-19 12:00:00', 1, 0, 3, 0, NULL, NULL, 'San Petesburgo', 'San Petesburgo Stadium', 0, 'A', 1),
 (4, '2018-06-20 09:00:00', 4, 0, 2, 0, NULL, NULL, 'Rostov del Don', 'Rostov Arena', 0, 'A', 1),
 (5, '2018-06-25 08:00:00', 2, 0, 3, 0, NULL, NULL, 'Volgrado', 'Volgrado Arena', 0, 'A', 1),
