@@ -20,7 +20,7 @@ export class UserPredictionsComponent  {
   constructor(private gamesService:GamesService,private authenticationService:AuthenticationService,private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
     console.log('userid',this.userId);
-    
+
   }
 
   getGames(userId){
@@ -35,8 +35,8 @@ export class UserPredictionsComponent  {
       this.predictions=data.results;
     })
   }
-  
-  
+
+
 
   ngAfterViewInit(){
     this.getGames(this.userId);
@@ -44,12 +44,14 @@ export class UserPredictionsComponent  {
 
 
 
-  updateProjection(scoreTeam1,scoreTeam2,winnerId,predictionId,teamName1,teamName2) {
+  updateProjection(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,teamName1,teamName2) {
     const activeModal = this.modalService.open(EditModalComponent, { size: 'sm', container: 'nb-layout' });
-    
+
     activeModal.componentInstance.modalHeader = 'Cámbia tu Predicción';
     activeModal.componentInstance.scoreTeam1 = scoreTeam1;
     activeModal.componentInstance.scoreTeam2 = scoreTeam2;
+    activeModal.componentInstance.teamId1 = teamId1;
+    activeModal.componentInstance.teamId2 = teamId2;
     activeModal.componentInstance.predictionId = predictionId;
     activeModal.componentInstance.winnerId = winnerId;
     activeModal.componentInstance.teamName1 = teamName1;
@@ -57,6 +59,6 @@ export class UserPredictionsComponent  {
     activeModal.componentInstance.userId = this.userId;
     activeModal.componentInstance.model.scoreTeam1 = scoreTeam1;
     activeModal.componentInstance.model.scoreTeam2 = scoreTeam2;
-    
+
   }
 }

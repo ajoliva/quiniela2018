@@ -99,12 +99,12 @@ export class GamesService {
             .map(res => res.json()).catch(this.handleError);
     }
 
-    updatePrediction(scoreTeam1,scoreTeam2,winnerId,predictionId,date){
+    updatePrediction(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,date){
 
         if(scoreTeam1>scoreTeam2){
-            winnerId=scoreTeam1;
+            winnerId=teamId1;
         }else if(scoreTeam1<scoreTeam2){
-            winnerId=scoreTeam2;
+            winnerId=teamId2;
         }else{
             winnerId=33;
         }

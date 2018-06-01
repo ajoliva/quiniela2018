@@ -19,6 +19,8 @@ export class EditModalComponent {
   public predictionId:any;
   public teamName1:any;
   public teamName2:any;
+  public teamId1: any;
+  public teamId2: any;
   public winnerId:any;
   public date:any;
   public userId:any;
@@ -29,13 +31,13 @@ export class EditModalComponent {
 
 
   updatePrediction(){
-      
+
       if(this.model){
         console.log('ready to set score!',this.userId);
-        
-        this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date())).subscribe(data=>{
+
+        this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date())).subscribe(data=>{
           this.activeModal.close();
-          
+
         }, err => {
           this.error = "No es posible actualizar la predicción, o ya se venció el tiempo."
         })
