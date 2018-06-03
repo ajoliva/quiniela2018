@@ -68,7 +68,13 @@ exports.setGameScores = (req, res, next) => {
     const scoreTeam1 = req.body.scoreTeam1;
     const scoreTeam2 = req.body.scoreTeam2;
     const gameId = req.params.gameId;
-    const setScoreQuery = "UPDATE game SET scoreTeam1 = ?, scoreTeam2 = ? WHERE game.gameId = ?";
+    let qualifyId = '';
+    let setScoreQuery = "UPDATE game SET scoreTeam1 = ?, scoreTeam2 = ?";
+    if(req.body.qualifyId) {
+        qualifyId = req.body.qualifyId;
+        setScoreQuery += ", QualifyId = " + qualifyId;
+    }
+    setScoreQuery += " WHERE game.gameId = ?";
     connection.query(setScoreQuery, [scoreTeam1, scoreTeam2, gameId],(err, results, fields) => {
         if(err) {
             return res.status(500).json({

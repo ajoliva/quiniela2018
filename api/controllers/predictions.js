@@ -107,8 +107,12 @@ exports.setPrediction = (req, res, next) => {
     const date = req.body.date;
     const teamId1 = req.body.teamId1;
     const teamId2 = req.body.teamId2;
+    let qualifyId = '';
+    if(req.body.qualifyId) {
+        qualifyId = req.body.qualifyId;
+    }
     console.log('set prediction: GameDate: '+req.body.GameDate+' PredictionDate: '+req.body.PredictionDate)
-    const fields = [
+    let fields = [
         'userId',
         'gameId', 
         'GameDate',
@@ -119,20 +123,29 @@ exports.setPrediction = (req, res, next) => {
         'scoreTeam2',
         'WinnerId'
     ];
-    const query = "insert into prediction (??) values (?, ?,?, ?, ?, ?,?,?,?)";
+    let params = [
+        fields, 
+        req.body.userId,
+        req.body.gameId,
+        req.body.GameDate,
+        req.body.PredictionDate,
+        req.body.teamId1,
+        req.body.scoreTeam1,
+        req.body.teamId2,
+        req.body.scoreTeam2,
+        req.body.WinnerId
+    ]
+    let query = "insert into prediction (??) values (?, ?,?, ?, ?, ?,?,?,?";
+    console.log(qualifyId);
+    if(qualifyId !== '') {
+        console.log("inserting");
+        query += "," + qualifyId;
+        fields.push('QualifyId');
+        console.log(fields);
+    }
+    query += ")";
     connection.query(query, 
-        [
-            fields, 
-            req.body.userId,
-            req.body.gameId,
-            req.body.GameDate,
-            req.body.PredictionDate,
-            req.body.teamId1,
-            req.body.scoreTeam1,
-            req.body.teamId2,
-            req.body.scoreTeam2,
-            req.body.WinnerId
-        ], 
+        params, 
         (err, results, fields) => {
         if(err) {
             return res.status(500).json({
