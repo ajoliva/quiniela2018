@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>
+        <div class="row">
+          <div class="col-10">
+              Leaderboard
+          </div>
+          <div class="col-2">
+              <button (click)="ngAfterViewInit()" class="btn btn-success btn-icon" type="button">
+                  <i class="nb-loop" ></i>
+                </button>
+          </div>
+        </div>
+      </nb-card-header>
+        <nb-card-body>
+            <table class="table table-hover table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Puntos Fase 1</th>
+                    <th scope="col">Puntos Fase 2</th>
+                    <th scope="col">Puntos Fase 3</th>
+                    <th scope="col">Puntos Fase 4</th>
+                    <th scope="col">Puntos Fase 5</th>
+                    <th scope="col">Puntos Totales</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor= "let user of userData">
+                    <td>{{user.name}}</td>
+                    <td>{{user.pointsfase1}}</td>
+                    <td>{{user.pointsfase2}}</td>
+                    <td>{{user.pointsfase3}}</td>
+                    <td>{{user.pointsfase4}}</td>
+                    <td>{{user.pointsfase5}}</td>
+                    <td>{{user.totalpoints}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </nb-card-body>
+        <nb-card-footer></nb-card-footer>
+    </nb-card>
+
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { ProjectionsComponent} from './projections/projections.component'
 
 import { AuthGuard } from '../pages/services/auth/auth.guard.component';
 import { UserPredictionsComponent } from './user-predictions/user-predictions.component';
+import { LeaderboardComponent } from './leaderboards/leaderboard.component';
 
 const routes: Routes = [
   
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: 'predictions',
     component:UserPredictionsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'leaderboard',
+    component:LeaderboardComponent,
     canActivate:[AuthGuard]
   }, /* {
     path: 'ui-features',

@@ -8,6 +8,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
 import {ProjectionsModule} from './projections/projections.module';
 import {UserPredictionsModule} from './user-predictions/user-predictions.module'
+import { LeaderboardModule } from './leaderboards/leaderboard.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -20,7 +21,8 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     ProjectionsModule,
-    UserPredictionsModule
+    UserPredictionsModule,
+    LeaderboardModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,
