@@ -47,4 +47,12 @@ export class UsersService {
         return this.http.get('/api/users/allusers?orderbypoints=true',options)
             .map(res => res.json()).catch(this.handleError);
     }
+
+    getUserpoints(email) {
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear});
+        let options = new RequestOptions({headers:headers});
+        return this.http.get('/api/users/userinfo/'+email,options)
+            .map(res => res.json()).catch(this.handleError);
+    }
 }

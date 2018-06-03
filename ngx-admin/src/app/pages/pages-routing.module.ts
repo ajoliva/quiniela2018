@@ -9,6 +9,7 @@ import { ProjectionsComponent} from './projections/projections.component'
 import { AuthGuard } from '../pages/services/auth/auth.guard.component';
 import { UserPredictionsComponent } from './user-predictions/user-predictions.component';
 import { LeaderboardComponent } from './leaderboards/leaderboard.component';
+import { UserpointsComponent } from './user-points/userpoints.component';
 
 const routes: Routes = [
   
@@ -33,6 +34,11 @@ const routes: Routes = [
   {
     path: 'leaderboard',
     component:LeaderboardComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'userpoints',
+    component:UserpointsComponent,
     canActivate:[AuthGuard]
   }, /* {
     path: 'ui-features',
