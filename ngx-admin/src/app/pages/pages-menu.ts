@@ -17,6 +17,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/predictions',
     home: true,
   },
+  {
+    title: 'Leaderboard',
+    icon: 'nb-tables',
+    link: '/pages/leaderboard',
+    home: true,
+  },
+  {
+    title: 'Leaderboard',
+    icon: 'nb-tables',
+    link: '/pages/userpoints',
+    home: true,
+  },
   /* ,
   {
     title: 'UI Features',

@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const userFields = [
     'email',
     'name',
+    'username',
     'totalpoints',
     'pointsfase1',
     'pointsfase2',
