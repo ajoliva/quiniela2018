@@ -19,17 +19,28 @@ export class ProjectionsComponent  {
 
   constructor(private gamesService:GamesService,private authenticationService:AuthenticationService,private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
-    console.log('userid',this.userId);
+    
     
   }
 
   getGames(userId){
     this.gamesService.getGames().subscribe(data=>{
-      console.log(data.results)
+      
       let tempDate;
       data.results.forEach(element => {
         tempDate = new Date(element.date);
         element.dateLocal=tempDate.toLocaleDateString("es-GT");
+        if(typeof element.QualifyId !== 'undefined' && null !== element.QualifyId){
+          if(element.QualifyId==element.teamId1){
+            element['QualifyName']=element.teamName1
+          }else if(element.QualifyId==element.teamId2){
+            element['QualifyName']=element.teamName2
+          }else{
+            element['QualifyName']='N/A';
+          }
+        }else{
+          element['QualifyName']='N/A';
+        }
       });
 
       this.games=data.results;
@@ -51,9 +62,9 @@ export class ProjectionsComponent  {
   }
 
 
-  setProjection(gameId,team1,team2,teamId1,teamId2,date) {
+  setProjection(gameId,team1,team2,teamId1,teamId2,date,QualifyId) {
     const activeModal = this.modalService.open(EditModalComponent, { size: 'lg', container: 'nb-layout' });
-    console.log('set projection date:',date);
+    
     activeModal.componentInstance.modalHeader = 'Ingresa tu Predicción';
     activeModal.componentInstance.gameId = gameId;
     activeModal.componentInstance.team1 = team1;
@@ -62,6 +73,7 @@ export class ProjectionsComponent  {
     activeModal.componentInstance.teamId2 = teamId2;
     activeModal.componentInstance.date = date;
     activeModal.componentInstance.userId = this.userId;
+    activeModal.componentInstance.QualifyId=QualifyId;
     activeModal.componentInstance.predictionDate = (new Date());
   }
 }

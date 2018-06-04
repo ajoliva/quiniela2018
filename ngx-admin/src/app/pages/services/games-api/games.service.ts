@@ -77,7 +77,7 @@ export class GamesService {
             .map(res => res.json()).catch(this.handleError);
     }
 
-    setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate){
+    setPrediction(gameId,scoreTeam1,scoreTeam2,teamId1,teamId2,date,userId,winnerId,predictionDate,QualifyId){
 
         if(scoreTeam1>scoreTeam2){
             winnerId=teamId1;
@@ -89,8 +89,8 @@ export class GamesService {
         date = this.parseDate(date);
         predictionDate = this.parseDate(predictionDate);
 
-        console.log(` set prediction: gameDate:${date} predictionDate:${predictionDate}`);
-        let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}`;
+        
+        let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}&qualifyId=${QualifyId}`;
 
         let barear=`Bearer ${this.authenticationService.token}`
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
@@ -99,8 +99,8 @@ export class GamesService {
             .map(res => res.json()).catch(this.handleError);
     }
 
-    updatePrediction(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,date){
-
+    updatePrediction(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,date,QualifyId){
+        
         if(scoreTeam1>scoreTeam2){
             winnerId=teamId1;
         }else if(scoreTeam1<scoreTeam2){
@@ -109,7 +109,7 @@ export class GamesService {
             winnerId=33;
         }
         date = this.parseDate(date);
-        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&winnerId=${winnerId}`;
+        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&winnerId=${winnerId}&qualifyId=${QualifyId}`;
 
         let barear=`Bearer ${this.authenticationService.token}`
         let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});

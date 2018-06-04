@@ -26,16 +26,28 @@ export class EditModalComponent {
   public userId:any;
   public model: any = {};
   public error:any;
+  public QualifyId:any;
 
   constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) { }
 
-
+  getQualifyText(){
+    if(typeof this.model.QualifyId !== 'undefined' && null !== this.model.QualifyId){
+      if(this.model.QualifyId == this.teamId1){
+        return `Califica: ${this.teamName1}`;
+      }else if(this.model.QualifyId == this.teamId2){
+        return `Califica: ${this.teamName2}`;
+      }else{
+        return `Especificar`
+      }
+    }
+    return `Especificar`;
+  }
   updatePrediction(){
 
       if(this.model){
-        console.log('ready to set score!',this.userId);
+        
 
-        this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date())).subscribe(data=>{
+        this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date()),this.model.QualifyId).subscribe(data=>{
           this.activeModal.close();
 
         }, err => {

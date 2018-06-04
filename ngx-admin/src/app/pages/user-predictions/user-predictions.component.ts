@@ -30,6 +30,18 @@ export class UserPredictionsComponent  {
       data.results.forEach(element => {
         tempDate = new Date(element.PredictionDate);
         element.dateLocal=tempDate.toLocaleDateString("es-GT");
+
+        if(typeof element.QualifyId !== 'undefined' && null !== element.QualifyId){
+          if(element.QualifyId==element.teamId1){
+            element['QualifyName']=element.teamName1
+          }else if(element.QualifyId==element.teamId2){
+            element['QualifyName']=element.teamName2
+          }else{
+            element['QualifyName']='N/A';
+          }
+        }else{
+          element['QualifyName']='N/A';
+        }
       });
 
       this.predictions=data.results;
@@ -44,8 +56,8 @@ export class UserPredictionsComponent  {
 
 
 
-  updateProjection(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,teamName1,teamName2) {
-    const activeModal = this.modalService.open(EditModalComponent, { size: 'sm', container: 'nb-layout' });
+  updateProjection(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,teamName1,teamName2,QualifyId) {
+    const activeModal = this.modalService.open(EditModalComponent, { size: 'lg', container: 'nb-layout' });
 
     activeModal.componentInstance.modalHeader = 'Cámbia tu Predicción';
     activeModal.componentInstance.scoreTeam1 = scoreTeam1;
@@ -59,6 +71,7 @@ export class UserPredictionsComponent  {
     activeModal.componentInstance.userId = this.userId;
     activeModal.componentInstance.model.scoreTeam1 = scoreTeam1;
     activeModal.componentInstance.model.scoreTeam2 = scoreTeam2;
+    activeModal.componentInstance.model.QualifyId = QualifyId
 
   }
 }

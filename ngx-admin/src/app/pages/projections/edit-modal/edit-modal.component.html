@@ -21,6 +21,16 @@
                 <input type="text" class="form-control" name="scoreTeam2" [(ngModel)]="model.scoreTeam2" #username="ngModel" required />
             </div>
         </div>
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 control-label">Califica</label>
+
+            <div class="col-sm-9">
+                <select  class="form-control" name="QualifyId" [(ngModel)]="model.QualifyId" #username="ngModel" required >
+                    <option [value]="teamId1">{{team1}}</option>
+                    <option [value]="teamId2">{{team2}}</option>
+                </select>
+            </div>
+        </div>
         <!-- <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
                 <button type="submit" class="btn btn-info ">Ingresar</button>

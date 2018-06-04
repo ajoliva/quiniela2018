@@ -26,6 +26,7 @@ export class EditModalComponent {
   public userId: any;
   public model: any = {};
   public error: any;
+  public QualifyId: any=null;
 
   constructor(private activeModal: NgbActiveModal, private gamesService: GamesService) { }
 
@@ -38,7 +39,7 @@ export class EditModalComponent {
 
       console.log(`modal: gameDate:${this.date} predictionDate:${this.predictionDate}`);
            
-      this.gamesService.setPrediction(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2, this.teamId1, this.teamId2, this.date, this.userId, null, this.gamesService.parseDate(this.predictionDate)).subscribe(data => {
+      this.gamesService.setPrediction(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2, this.teamId1, this.teamId2, this.date, this.userId, null, this.gamesService.parseDate(this.predictionDate),this.model.QualifyId).subscribe(data => {
 
         
 
