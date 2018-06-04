@@ -53,6 +53,8 @@ export class LoginComponent {
           this.error = 'Usuario o contraseña son incorrectos. Tu usuario puede aún no estar activado.';
 
         }
+      }, err => {
+        this.error = 'Usuario o contraseña son incorrectos. Tu usuario puede aún no estar activado.'
       }); 
   }
 }
