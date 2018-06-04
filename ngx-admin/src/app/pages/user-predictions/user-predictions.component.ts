@@ -19,13 +19,13 @@ export class UserPredictionsComponent  {
 
   constructor(private gamesService:GamesService,private authenticationService:AuthenticationService,private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
-    console.log('userid',this.userId);
+    
 
   }
 
   getGames(userId){
     this.gamesService.getPredictions(userId).subscribe(data=>{
-      console.log(data.results)
+      
       let tempDate;
       data.results.forEach(element => {
         tempDate = new Date(element.PredictionDate);
