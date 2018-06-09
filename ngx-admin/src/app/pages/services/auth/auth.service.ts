@@ -17,13 +17,13 @@ export class AuthenticationService {
     constructor(private http: Http,private router:Router) {
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        console.log(currentUser);
+        
         this.token = currentUser && currentUser.token;
         this.email = currentUser && currentUser.email;
         this.userId = currentUser && currentUser.userId;
         this.isActive = currentUser && currentUser.isActive;
         this.isAdmin = currentUser && currentUser.isAdmin;
-        console.log(this.email);
+        
     }
 
     login(email: string, password: string): Observable<boolean> {

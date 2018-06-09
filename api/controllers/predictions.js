@@ -166,10 +166,23 @@ exports.updatePrediction = (req, res, next) => {
     const winnerId = req.body.winnerId;
     const predictionId = req.params.predictionId;
     const qualifyId = req.body.qualifyId;
-
-    const setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=?, qualifyId=? WHERE predictionId=?";
+    let setScoreQuery;
+    
     console.log(qualifyId);
-    connection.query(setScoreQuery, [scoreTeam1, scoreTeam2, winnerId, qualifyId,predictionId,],(err, results, fields) => {
+
+    if(typeof qualifyId == 'undefined' || qualifyId=='null'){
+        
+         setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=? WHERE predictionId=?";
+        params = [scoreTeam1, scoreTeam2, winnerId,predictionId,]
+
+    }else{
+        
+         setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=?, qualifyId=? WHERE predictionId=?";
+        params = [scoreTeam1, scoreTeam2, winnerId, qualifyId,predictionId,]
+    }
+
+
+    connection.query(setScoreQuery, params,(err, results, fields) => {
         if(err) {
             return res.status(500).json({
                 message: "An error ocurred while setting scores.",

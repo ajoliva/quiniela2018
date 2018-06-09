@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userName:any;
+  userName:any = "hola";
 
   userMenu = [{ title: 'Log out' }];
   userPicture = '../../../../assets/images/avatar.png'
@@ -36,11 +36,12 @@ export class HeaderComponent implements OnInit {
                   }
                 })
 
-                this.userName= this.authService.name;
+                
   }
 
 
   ngOnInit() {
+    this.userName= this.authService.name;
     this.userService.getUsers()
       .subscribe((users: any) => this.user = users.nick);
   }

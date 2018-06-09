@@ -62,7 +62,7 @@ export class ProjectionsComponent  {
   }
 
 
-  setProjection(gameId,team1,team2,teamId1,teamId2,date,QualifyId) {
+  setProjection(gameId,team1,team2,teamId1,teamId2,date,QualifyId,fase) {
     const activeModal = this.modalService.open(EditModalComponent, { size: 'lg', container: 'nb-layout' });
     
     activeModal.componentInstance.modalHeader = 'Ingresa tu Predicción';
@@ -74,6 +74,7 @@ export class ProjectionsComponent  {
     activeModal.componentInstance.date = date;
     activeModal.componentInstance.userId = this.userId;
     activeModal.componentInstance.QualifyId=QualifyId;
+    activeModal.componentInstance.fase=fase;
     activeModal.componentInstance.predictionDate = (new Date());
   }
 }

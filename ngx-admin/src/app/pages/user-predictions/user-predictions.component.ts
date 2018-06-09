@@ -56,7 +56,7 @@ export class UserPredictionsComponent  {
 
 
 
-  updateProjection(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,teamName1,teamName2,QualifyId) {
+  updateProjection(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,teamName1,teamName2,QualifyId,fase,gameId) {
     const activeModal = this.modalService.open(EditModalComponent, { size: 'lg', container: 'nb-layout' });
 
     activeModal.componentInstance.modalHeader = 'Cámbia tu Predicción';
@@ -71,7 +71,10 @@ export class UserPredictionsComponent  {
     activeModal.componentInstance.userId = this.userId;
     activeModal.componentInstance.model.scoreTeam1 = scoreTeam1;
     activeModal.componentInstance.model.scoreTeam2 = scoreTeam2;
-    activeModal.componentInstance.model.QualifyId = QualifyId
+    activeModal.componentInstance.model.QualifyId = QualifyId;
+    activeModal.componentInstance.gameId = gameId;
+    activeModal.componentInstance.fase=fase;
+    
 
   }
 }

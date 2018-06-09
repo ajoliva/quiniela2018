@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,AfterViewInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {GamesService} from '../../services/games-api/games.service'
 
@@ -7,7 +7,7 @@ import {GamesService} from '../../services/games-api/games.service'
   templateUrl: './edit-modal.component.html',
   providers:[ GamesService]
 })
-export class EditModalComponent {
+export class EditModalComponent implements AfterViewInit {
 
   modalHeader: string;
   modalContent = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
@@ -27,8 +27,20 @@ export class EditModalComponent {
   public model: any = {};
   public error:any;
   public QualifyId:any;
+  public fase:any;
 
-  constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) { }
+  constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) {
+
+    
+   
+  }
+
+  ngAfterViewInit(){
+    this.gamesService.getGame(this.gameId).subscribe(data=>{
+      console.log("game:",data);
+      this.fase=data.results[0].Fase;
+    });
+  }
 
   getQualifyText(){
     if(typeof this.model.QualifyId !== 'undefined' && null !== this.model.QualifyId){
@@ -44,8 +56,13 @@ export class EditModalComponent {
   }
   updatePrediction(){
 
+
+    
+
       if(this.model){
-        
+        if(typeof this.model.QualifyId == 'undefined' || null == this.model.QualifyId){
+          this.model.QualifyId=null;
+        }
 
         this.gamesService.updatePrediction(this.model.scoreTeam1,this.model.scoreTeam2,this.teamId1,this.teamId2,this.winnerId,this.predictionId,this.gamesService.parseDate(new Date()),this.model.QualifyId).subscribe(data=>{
           this.activeModal.close();

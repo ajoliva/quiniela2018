@@ -59,6 +59,15 @@ export class GamesService {
             .map(res => res.json()).catch(this.handleError);
     }
 
+    getGame(gameId){
+
+        let barear=`Bearer ${this.authenticationService.token}`
+        let headers = new Headers({'Authorization':barear});
+        let options = new RequestOptions({headers:headers});
+        return this.http.get('/api/games/'+gameId,options)
+            .map(res => res.json()).catch(this.handleError);
+    }
+
     getGames(){
 
         let barear=`Bearer ${this.authenticationService.token}`
