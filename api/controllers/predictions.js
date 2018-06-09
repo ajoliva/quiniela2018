@@ -168,11 +168,11 @@ exports.updatePrediction = (req, res, next) => {
     const qualifyId = req.body.qualifyId;
     let setScoreQuery;
     
-    console.log(qualifyId);
+    
 
     if(typeof qualifyId == 'undefined' || qualifyId=='null'){
         
-         setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=? WHERE predictionId=?";
+         setScoreQuery = "UPDATE prediction SET  scoreTeam1= ?, scoreTeam2=?, winnerId=?, qualifyId=NULL WHERE predictionId=?";
         params = [scoreTeam1, scoreTeam2, winnerId,predictionId,]
 
     }else{

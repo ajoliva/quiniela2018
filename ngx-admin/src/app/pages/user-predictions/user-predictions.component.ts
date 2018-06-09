@@ -72,9 +72,10 @@ export class UserPredictionsComponent  {
     activeModal.componentInstance.model.scoreTeam1 = scoreTeam1;
     activeModal.componentInstance.model.scoreTeam2 = scoreTeam2;
     activeModal.componentInstance.model.QualifyId = QualifyId;
+    activeModal.componentInstance.QualifyId = QualifyId;
     activeModal.componentInstance.gameId = gameId;
     activeModal.componentInstance.fase=fase;
     
-
+    
   }
 }

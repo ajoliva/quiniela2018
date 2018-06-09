@@ -34,6 +34,15 @@ export class EditModalComponent {
   }
 
 
+  showQualifyIdFormEntry(){
+    let enable =  (this.fase>1) && (this.model.scoreTeam1!=this.model.scoreTeam2)
+    if(!enable){
+      this.model.QualifyId=null;
+    }
+
+    return enable
+  }
+
   setPrediction() {
 
     if (this.model) {

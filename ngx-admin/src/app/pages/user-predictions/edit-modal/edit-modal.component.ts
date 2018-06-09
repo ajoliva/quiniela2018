@@ -28,6 +28,9 @@ export class EditModalComponent implements AfterViewInit {
   public error:any;
   public QualifyId:any;
   public fase:any;
+  
+
+  public number=0;
 
   constructor(private activeModal: NgbActiveModal,private gamesService:GamesService) {
 
@@ -35,18 +38,28 @@ export class EditModalComponent implements AfterViewInit {
    
   }
 
+  showQualifyIdFormEntry(){
+    let enable =  (this.fase>1) && (this.model.scoreTeam1!=this.model.scoreTeam2)
+    if(!enable){
+      this.model.QualifyId=null;
+    }
+
+    return enable
+  }
+
   ngAfterViewInit(){
     this.gamesService.getGame(this.gameId).subscribe(data=>{
-      console.log("game:",data);
+      
       this.fase=data.results[0].Fase;
     });
   }
 
   getQualifyText(){
-    if(typeof this.model.QualifyId !== 'undefined' && null !== this.model.QualifyId){
-      if(this.model.QualifyId == this.teamId1){
+    console.log(this.QualifyId)
+    if(typeof this.QualifyId !== 'undefined' && null !== this.QualifyId){
+      if(this.QualifyId == this.teamId1){
         return `Califica: ${this.teamName1}`;
-      }else if(this.model.QualifyId == this.teamId2){
+      }else if(this.QualifyId == this.teamId2){
         return `Califica: ${this.teamName2}`;
       }else{
         return `Especificar`
@@ -55,10 +68,6 @@ export class EditModalComponent implements AfterViewInit {
     return `Especificar`;
   }
   updatePrediction(){
-
-
-    
-
       if(this.model){
         if(typeof this.model.QualifyId == 'undefined' || null == this.model.QualifyId){
           this.model.QualifyId=null;
