@@ -29,13 +29,13 @@ export class EditModalComponent {
   public fase:any;
   public QualifyId: any=null;
 
-  constructor(private activeModal: NgbActiveModal, private gamesService: GamesService) { 
-    
+  constructor(private activeModal: NgbActiveModal, private gamesService: GamesService) {
+
   }
 
 
   showQualifyIdFormEntry(){
-    let enable =  (this.fase>1) && (this.model.scoreTeam1!=this.model.scoreTeam2)
+    let enable =  (this.fase>1) && (this.model.scoreTeam1==this.model.scoreTeam2)
     if(!enable){
       this.model.QualifyId=null;
     }
@@ -46,16 +46,16 @@ export class EditModalComponent {
   setPrediction() {
 
     if (this.model) {
-      
+
       this.date = new Date(this.date);
         console.log
       if(typeof this.model.QualifyId == 'undefined' || null == this.model.QualifyId){
         this.model.QualifyId='';
       }
-           
+
       this.gamesService.setPrediction(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2, this.teamId1, this.teamId2, this.date, this.userId, null, this.gamesService.parseDate(this.predictionDate),this.model.QualifyId).subscribe(data => {
 
-        
+
 
 
         this.closeModal();
