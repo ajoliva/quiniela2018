@@ -2,7 +2,6 @@ DELIMITER $$
 CREATE TRIGGER `trg_set_user_points` AFTER UPDATE ON `prediction` FOR EACH ROW begin
 
 DECLARE FASE Int;
-DECLARE SUMFASE Int;
 
 Select game.Fase INTO FASE FROM game where gameid=new.gameId;
 
