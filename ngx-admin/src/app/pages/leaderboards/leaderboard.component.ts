@@ -21,17 +21,26 @@ export class LeaderboardComponent  {
     private authenticationService:AuthenticationService,
     private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
-    
+
   }
 
   getLeaderboard(){
 
     this.usersService.getLeaderboard().subscribe(data=>{
+      let previousPoints=-1;
+      let currentPosition=0;
+      data.results.forEach(element => {
+        if (element.totalpoints<previousPoints||previousPoints==-1){
+          currentPosition++;
+          previousPoints = element.totalpoints;
+        }
+        element.position = currentPosition;
+      });
       this.userData=data.results;
     })
   }
-  
-  
+
+
 
   ngAfterViewInit(){
     this.getLeaderboard();
