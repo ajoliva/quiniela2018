@@ -24,7 +24,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Leaderboard',
+    title: 'Posiciones',
     icon: 'nb-tables',
     link: '/pages/leaderboard',
     home: true,
