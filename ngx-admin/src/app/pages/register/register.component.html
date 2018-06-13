@@ -1,12 +1,16 @@
 <nb-layout>
 
-    <nb-layout-column>
+    <nb-layout-column style="background-image:url('/assets/images/ball.jpg');
+                              background-repeat: no-repeat;
+                              background-position:center;
+                              background-attachment:fixed;
+                              background-size:cover;">
 
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <nb-card>
+                <nb-card style="background:#ffffffab">
                     <nb-card-header>
-                        <h1>Registro Quiniela 2018</h1>
+                        <h1 style="text-align: center;">Registro Quiniela 2018</h1>
                     </nb-card-header>
                     <nb-card-body>
                         <form (ngSubmit)="register()" class="form-vertical">

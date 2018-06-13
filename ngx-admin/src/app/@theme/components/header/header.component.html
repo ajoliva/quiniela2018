@@ -3,20 +3,15 @@
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()"><span>Quiniela 2018</span></div>
+    <div class="logo" (click)="goToHome()"><img src="/assets/images/headericon.png"/><span>Quiniela 2018</span></div>
   </div>
-  
-  
 </div>
-
 <nb-actions
   size="medium"
   class="header-container"
   [class.right]="position === 'normal'"
   [class.left]="position === 'inverse'">
-  
   <nb-action *nbIsGranted="['view', 'user']" >
     <nb-user [nbContextMenu]="userMenu" [name]="userName" [picture]="user?.picture" nbContextMenuTag="my-context-menu"></nb-user>
   </nb-action>
-  
 </nb-actions>

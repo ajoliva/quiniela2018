@@ -1,11 +1,11 @@
 DELIMITER $$
-drop trigger if exists trg_chkUpdate;
+drop trigger if exists trg_chkInsert;
 
-CREATE TRIGGER 'trg_chkUpdate' BEFORE UPDATE ON 'prediction'
+CREATE TRIGGER 'trg_chkInsert' BEFORE INSERT ON 'prediction'
  FOR EACH ROW begin
 declare msg varchar(255);
 
-IF  new.Gamedate<NOW() And new.Points=0 and old.Points=0 THEN
+IF  new.Gamedate<NOW() And new.Points=0 THEN
 		set msg = 'NO PUEDE MODIFICAR PREDICCIONES DE PARTIDOS PASADOS O YA INICIADOS ';
         signal sqlstate '45000' set message_text = msg;
 ELSEIF Hour(TIMEDIFF(new.Gamedate,NOW()))=0 and Minute(TIMEDIFF(new.Gamedate,NOW()))<=10 THEN
