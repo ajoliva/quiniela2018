@@ -1,6 +1,7 @@
-DELIMITER $$
 drop trigger if exists trg_set_points;
-CREATE TRIGGER `trg_set_points` AFTER UPDATE ON `game` FOR EACH ROW begin
+DELIMITER $$
+
+CREATE TRIGGER trg_set_points AFTER UPDATE ON game FOR EACH ROW begin
 
 IF  new.Finished=1 And OLD.Finished=0 and new.Fase=1 THEN
 	Update prediction SET points= 0 where  prediction.gameId=new.gameId;

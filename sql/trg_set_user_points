@@ -1,6 +1,7 @@
-DELIMITER $$
 drop trigger if exists trg_set_user_points;
-CREATE TRIGGER `trg_set_user_points` AFTER UPDATE ON `prediction` FOR EACH ROW begin
+DELIMITER $$
+
+CREATE TRIGGER trg_set_user_points AFTER UPDATE ON prediction FOR EACH ROW begin
 
 DECLARE FASE Int;
 
