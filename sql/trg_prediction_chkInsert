@@ -1,7 +1,7 @@
-DELIMITER $$
 drop trigger if exists trg_chkInsert;
+DELIMITER $$
 
-CREATE TRIGGER 'trg_chkInsert' BEFORE INSERT ON 'prediction'
+CREATE TRIGGER trg_chkInsert BEFORE INSERT ON prediction
  FOR EACH ROW begin
 declare msg varchar(255);
 
