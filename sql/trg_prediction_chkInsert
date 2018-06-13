@@ -1,3 +1,4 @@
+DELIMITER $$
 drop trigger if exists trg_chkInsert;
 
 CREATE TRIGGER 'trg_chkInsert' BEFORE INSERT ON 'prediction'
@@ -16,3 +17,5 @@ ELSE
 END IF;
 
 end
+$$
+DELIMITER ;
