@@ -5,20 +5,20 @@ CREATE TRIGGER trg_chkInsert BEFORE INSERT ON prediction
  FOR EACH ROW begin
 declare msg varchar(255);
 DECLARE FechaJuego DateTime;
-SELECT date Into FechaJuego From Game Where gameId=new.gameId;
+SELECT date Into FechaJuego From game Where gameId=new.gameId;
 
 Set new.GameDate=FechaJuego;
 IF  new.Gamedate<NOW() And new.Points=0 THEN
-		set msg = 'NO PUEDE MODIFICAR PREDICCIONES DE PARTIDOS PASADOS O YA INICIADOS ';
+set msg = 'NO PUEDE MODIFICAR PREDICCIONES DE PARTIDOS PASADOS O YA INICIADOS ';
         signal sqlstate '45000' set message_text = msg;
 ELSEIF Hour(TIMEDIFF(new.Gamedate,NOW()))=0 and Minute(TIMEDIFF(new.Gamedate,NOW()))<=10 THEN
-		set msg = 'Acceso de Modificación Denegado Exedio el Tiempo antes del inicio del partido ';
+set msg = 'Acceso de Modificación Denegado Exedio el Tiempo antes del inicio del partido ';
         signal sqlstate '45000' set message_text = msg;
 
 ELSE
         SET NEW.PredictionDate=NOW();
 END IF;
 
-end
+end 
 $$
 DELIMITER ;

@@ -1,3 +1,4 @@
+use quiniela;
 drop trigger if exists trg_chkUpdate;
 DELIMITER $$
 
@@ -5,14 +6,20 @@ CREATE TRIGGER trg_chkUpdate BEFORE UPDATE ON prediction
  FOR EACH ROW begin
 declare msg varchar(255);
 
-IF  new.Gamedate<NOW() And new.Points=0 and old.Points=0 THEN
+DECLARE FechaJuego DateTime;
+DECLARE finalizado int;
+SELECT date Into FechaJuego From game Where gameId=new.gameId;
+SELECT Finished Into finalizado From game Where gameId=new.gameId;
+
+Set new.GameDate=FechaJuego;
+IF  new.Gamedate<NOW() and not(new.scoreTeam1=old.scoreTeam1 and new.scoreTeam2=old.scoreTeam2) THEN
 		set msg = 'NO PUEDE MODIFICAR PREDICCIONES DE PARTIDOS PASADOS O YA INICIADOS ';
         signal sqlstate '45000' set message_text = msg;
-ELSEIF Hour(TIMEDIFF(new.Gamedate,NOW()))=0 and Minute(TIMEDIFF(new.Gamedate,NOW()))<=10 THEN
+ELSEIF Hour(TIMEDIFF(new.Gamedate,NOW()))=0 and Minute(TIMEDIFF(new.Gamedate,NOW()))<=10  and not(new.scoreTeam1=old.scoreTeam1 and new.scoreTeam2=old.scoreTeam2) THEN
 		set msg = 'Acceso de Modificación Denegado Exedio el Tiempo antes del inicio del partido ';
         signal sqlstate '45000' set message_text = msg;
 
-ELSE
+ELSEIF  not(new.scoreTeam1=old.scoreTeam1 and new.scoreTeam2=old.scoreTeam2) THEN
         SET NEW.PredictionDate=NOW();
 END IF;
 
