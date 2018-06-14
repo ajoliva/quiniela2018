@@ -96,8 +96,9 @@ export class GamesService {
             winnerId=33;
         }
         //Fix de fechas malas
-        date = this.parseDate("2018-06-15 00:00:00");
-        predictionDate = this.parseDate(predictionDate);
+        //mandando un default que es ignorado despues
+        date = "2018-06-15 00:00:00";
+        predictionDate = "2018-06-15 00:00:00";
 
         
         let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}&qualifyId=${QualifyId}`;
