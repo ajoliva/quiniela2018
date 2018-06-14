@@ -5,6 +5,10 @@ CREATE TRIGGER trg_chkUpdate BEFORE UPDATE ON prediction
  FOR EACH ROW begin
 declare msg varchar(255);
 
+DECLARE FechaJuego DateTime;
+SELECT date Into FechaJuego From game Where gameId=new.gameId;
+
+Set new.GameDate=FechaJuego;
 IF  new.Gamedate<NOW() And new.Points=0 and old.Points=0 THEN
 		set msg = 'NO PUEDE MODIFICAR PREDICCIONES DE PARTIDOS PASADOS O YA INICIADOS ';
         signal sqlstate '45000' set message_text = msg;
