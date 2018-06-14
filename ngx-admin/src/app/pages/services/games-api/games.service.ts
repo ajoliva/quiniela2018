@@ -95,7 +95,8 @@ export class GamesService {
         }else{
             winnerId=33;
         }
-        date = this.parseDate(date);
+        //Fix de fechas malas
+        date = this.parseDate("2018-06-15 00:00:00");
         predictionDate = this.parseDate(predictionDate);
 
         
