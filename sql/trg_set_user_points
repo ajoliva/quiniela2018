@@ -7,23 +7,23 @@ DECLARE FASE Int;
 
 Select game.Fase INTO FASE FROM game where gameid=new.gameId;
 
-IF  new.Points<>0 And FASE=1 THEN
+IF  FASE=1 THEN
 	Update users SET pointsfase1= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=1 and gameid<=48) WHERE userId=new.userId;
 END IF;
 
-IF  new.Points<>0 and FASE=2 THEN
+IF  FASE=2 THEN
 	Update users SET pointsfase2= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=2 and gameid>48 and gameid<=56) WHERE userId=new.userId;
 END IF;
 
-IF  new.Points<>0 and FASE=3 THEN
+IF  FASE=3 THEN
 	Update users SET pointsfase3= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=3 and gameid>56 and gameid<=60) WHERE userId=new.userId;
 END IF;
 
-IF  new.Points<>0 and FASE=4 THEN
+IF  FASE=4 THEN
 	Update users SET pointsfase4= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=4 and gameid>60 and gameid<=62) WHERE userId=new.userId;
 END IF;
 
-IF  new.Points<>0 and FASE=5 THEN
+IF  FASE=5 THEN
 	Update users SET pointsfase5= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=5 and gameid>62 and gameid<=64) WHERE userId=new.userId;
 END IF;
 
