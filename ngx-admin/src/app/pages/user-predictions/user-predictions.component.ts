@@ -19,16 +19,16 @@ export class UserPredictionsComponent  {
 
   constructor(private gamesService:GamesService,private authenticationService:AuthenticationService,private modalService: NgbModal){
     this.userId = this.authenticationService.userId;
-    
+
 
   }
 
   getGames(userId){
     this.gamesService.getPredictions(userId).subscribe(data=>{
-      
+
       let tempDate;
       data.results.forEach(element => {
-        tempDate = new Date(element.PredictionDate);
+        tempDate = new Date(element.GameDate);
         element.dateLocal=tempDate.toLocaleDateString("es-GT");
 
         if(typeof element.QualifyId !== 'undefined' && null !== element.QualifyId){
@@ -75,7 +75,7 @@ export class UserPredictionsComponent  {
     activeModal.componentInstance.QualifyId = QualifyId;
     activeModal.componentInstance.gameId = gameId;
     activeModal.componentInstance.fase=fase;
-    
-    
+
+
   }
 }
