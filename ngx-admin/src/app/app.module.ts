@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {AuthenticationService} from '../app/pages/services/auth/auth.service'
 import {AuthGuard} from '../app/pages/services/auth/auth.guard.component';
+import {AuthAdminGuard} from '../app/pages/services/auth/auth.guard.admin.component';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -33,7 +34,7 @@ import { HttpModule } from '@angular/http';
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },AuthenticationService,AuthGuard
+    { provide: APP_BASE_HREF, useValue: '/' },AuthenticationService,AuthGuard,AuthAdminGuard
   ],
 })
 export class AppModule {

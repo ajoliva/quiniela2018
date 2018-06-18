@@ -10,6 +10,8 @@ import { AuthGuard } from '../pages/services/auth/auth.guard.component';
 import { UserPredictionsComponent } from './user-predictions/user-predictions.component';
 import { LeaderboardComponent } from './leaderboards/leaderboard.component';
 import { UserpointsComponent } from './user-points/userpoints.component';
+import { GameAdminComponent } from './game-admin/game-admin.component';
+import { AuthAdminGuard } from './services/auth/auth.guard.admin.component';
 
 const routes: Routes = [
   
@@ -40,6 +42,11 @@ const routes: Routes = [
     path: 'userpoints',
     component:UserpointsComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path: 'game-admin',
+    component:GameAdminComponent,
+    canActivate:[AuthAdminGuard]
   }, /* {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',

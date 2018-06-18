@@ -10,6 +10,8 @@ import {ProjectionsModule} from './projections/projections.module';
 import {UserPredictionsModule} from './user-predictions/user-predictions.module'
 import { LeaderboardModule } from './leaderboards/leaderboard.module';
 import { UserpointsModule } from './user-points/userpoints.module';
+import { GameAdminModule } from './game-admin/game-admin.module';
+
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -24,7 +26,8 @@ const PAGES_COMPONENTS = [
     ProjectionsModule,
     UserPredictionsModule,
     LeaderboardModule,
-    UserpointsModule
+    UserpointsModule,
+    GameAdminModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

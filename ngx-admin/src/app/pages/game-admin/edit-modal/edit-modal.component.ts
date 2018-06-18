@@ -43,21 +43,17 @@ export class EditModalComponent {
     return enable
   }
 
-  setPrediction() {
+  setGameScores() {
 
     if (this.model) {
-      
 
-      this.date = new Date(this.date);
+      console.log("scores:"," "+this.model.scoreTeam1+" "+this.model.scoreTeam2);
         
       if(typeof this.model.QualifyId == 'undefined' || null == this.model.QualifyId){
         this.model.QualifyId='';
       }
 
-      this.gamesService.setPrediction(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2, this.teamId1, this.teamId2, this.date, this.userId, null, this.gamesService.parseDate(this.predictionDate),this.model.QualifyId).subscribe(data => {
-
-
-
+      this.gamesService.setGameScores(this.gameId, this.model.scoreTeam1, this.model.scoreTeam2,this.model.QualifyId).subscribe(data => {
 
         this.closeModal();
 

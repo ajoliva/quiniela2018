@@ -29,6 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/leaderboard',
     home: true,
   },
+  
   /* ,
   {
     title: 'UI Features',

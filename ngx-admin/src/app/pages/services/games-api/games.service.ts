@@ -77,10 +77,12 @@ export class GamesService {
             .map(res => res.json()).catch(this.handleError);
     }
 
-    setGameScores(gameId,scoreTeam1,scoreTeam2){
-        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam1}`;
+    setGameScores(gameId,scoreTeam1,scoreTeam2,qualifyId){
+        
+        let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&qualifyId=${qualifyId}`;
+        console.log("body:",body)
         let barear=`Bearer ${this.authenticationService.token}`
-        let headers = new Headers({'Authorization':barear});
+        let headers = new Headers({'Authorization':barear,'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers:headers});
         return this.http.patch('/api/games/'+gameId+'/scores',body,options)
             .map(res => res.json()).catch(this.handleError);
