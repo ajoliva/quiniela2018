@@ -29,12 +29,14 @@ export class LeaderboardComponent  {
     this.usersService.getLeaderboard().subscribe(data=>{
       let previousPoints=-1;
       let currentPosition=0;
+      let counter=1;
       data.results.forEach(element => {
         if (element.totalpoints<previousPoints||previousPoints==-1){
-          currentPosition++;
+          currentPosition=counter;
           previousPoints = element.totalpoints;
         }
         element.position = currentPosition;
+        counter++;
       });
       this.userData=data.results;
     })
