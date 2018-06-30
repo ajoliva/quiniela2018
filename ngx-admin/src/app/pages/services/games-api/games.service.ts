@@ -78,7 +78,7 @@ export class GamesService {
     }
 
     setGameScores(gameId,scoreTeam1,scoreTeam2,qualifyId){
-        
+
         let body = `scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&qualifyId=${qualifyId}`;
         console.log("body:",body)
         let barear=`Bearer ${this.authenticationService.token}`
@@ -92,8 +92,10 @@ export class GamesService {
 
         if(scoreTeam1>scoreTeam2){
             winnerId=teamId1;
+            QualifyId=teamId1;
         }else if(scoreTeam1<scoreTeam2){
             winnerId=teamId2;
+            QualifyId=teamId2;
         }else{
             winnerId=33;
         }
@@ -102,7 +104,7 @@ export class GamesService {
         date = "2018-06-15 00:00:00";
         predictionDate = "2018-06-15 00:00:00";
 
-        
+
         let body = `gameId=${gameId}&userId=${userId}&scoreTeam1=${scoreTeam1}&scoreTeam2=${scoreTeam2}&GameDate=${date}&teamId1=${teamId1}&teamId2=${teamId2}&WinnerId=${winnerId}&PredictionDate=${predictionDate}&qualifyId=${QualifyId}`;
 
         let barear=`Bearer ${this.authenticationService.token}`
@@ -113,11 +115,13 @@ export class GamesService {
     }
 
     updatePrediction(scoreTeam1,scoreTeam2,teamId1,teamId2,winnerId,predictionId,date,QualifyId){
-        
+
         if(scoreTeam1>scoreTeam2){
             winnerId=teamId1;
+            QualifyId=teamId1;
         }else if(scoreTeam1<scoreTeam2){
             winnerId=teamId2;
+            QualifyId=teamId2;
         }else{
             winnerId=33;
         }
