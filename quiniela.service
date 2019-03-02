@@ -1,0 +1,14 @@
+[Unit]
+Description=index.js
+Documentation=
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3001
+Type=simple
+User=root
+ExecStart=/usr/bin/node /home/quinielaApp/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

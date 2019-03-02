@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+        <nb-card-header>Todos los Partidos</nb-card-header>
+        <nb-card-body>
+            <table class="table table-hover table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Equipo A</th>
+                    <th scope="col">Goles A</th>
+                    <th scope="col">Goles B</th>
+                    <th scope="col">Equipo B</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Ganador</th>
+                    <th scope="col">Califica</th>
+                    <th scope="col">Agregar predicción</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor= "let game of games">
+                    <td>{{game.dateLocal}}</td>
+                    <td>{{game.teamName1}}</td>
+                    <td>{{game.scoreTeam1}}</td>
+                    <td>{{game.scoreTeam2}}</td>
+                    <td>{{game.teamName2}}</td>
+                    <td>{{game.Grupo}}</td>
+                    <td>{{game.winnerName}}</td>
+                    <td>{{game.QualifyName}}</td>
+                    <td>
+                        <button *ngIf="!game.Finished" (click)="setProjection(game.gameId,game.teamName1,game.teamName2,game.teamId1,game.teamId2,game.date,game.QuealifyId,game.Fase)" class="btn btn-primary btn-icon" type="button">
+                          <i class="nb-compose" ></i>
+                        </button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+        </nb-card-body>
+        <nb-card-footer></nb-card-footer>
+    </nb-card>
+
+  </div>
+</div>

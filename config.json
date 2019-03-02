@@ -1,0 +1,14 @@
+{
+    "app": {
+        "PORT": 80
+    },
+    "db": {
+        "DATABASE": "quiniela",
+        "USER": "root",
+        "PASSWORD": "quiniela_root",
+        "HOST": "localhost"
+    },
+    "auth": {
+        "JWT_KEY": "VSbQtqXTowbM01z52Gdc"
+    }
+}

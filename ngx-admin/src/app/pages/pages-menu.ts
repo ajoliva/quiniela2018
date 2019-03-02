@@ -2,15 +2,35 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Dashboard',
+    title: 'Menú',
+    group: true,
+  },
+  {
+    title: 'Partidos',
     icon: 'nb-home',
-    link: '/pages/dashboard',
+    link: '/pages/projections',
     home: true,
   },
   {
-    title: 'FEATURES',
-    group: true,
+    title: 'Predicciones',
+    icon: 'nb-compose',
+    link: '/pages/predictions',
+    home: true,
   },
+  {
+    title: 'Mi Puntaje',
+    icon: 'nb-person',
+    link: '/pages/userpoints',
+    home: true,
+  },
+  {
+    title: 'Posiciones',
+    icon: 'nb-tables',
+    link: '/pages/leaderboard',
+    home: true,
+  },
+  
+  /* ,
   {
     title: 'UI Features',
     icon: 'nb-keypad',
@@ -172,5 +192,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },
+  }, */
 ];

@@ -15,6 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {AuthenticationService} from '../app/pages/services/auth/auth.service'
+import {AuthGuard} from '../app/pages/services/auth/auth.guard.component';
+import {AuthAdminGuard} from '../app/pages/services/auth/auth.guard.admin.component';
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,14 +27,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    HttpModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: APP_BASE_HREF, useValue: '/' },AuthenticationService,AuthGuard,AuthAdminGuard
   ],
 })
 export class AppModule {

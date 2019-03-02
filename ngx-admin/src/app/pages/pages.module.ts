@@ -6,6 +6,13 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 
+import {ProjectionsModule} from './projections/projections.module';
+import {UserPredictionsModule} from './user-predictions/user-predictions.module'
+import { LeaderboardModule } from './leaderboards/leaderboard.module';
+import { UserpointsModule } from './user-points/userpoints.module';
+import { GameAdminModule } from './game-admin/game-admin.module';
+
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -16,6 +23,11 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     MiscellaneousModule,
+    ProjectionsModule,
+    UserPredictionsModule,
+    LeaderboardModule,
+    UserpointsModule,
+    GameAdminModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

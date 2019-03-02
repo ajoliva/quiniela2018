@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+        <nb-card-header>
+          <div class="row">
+            <div class="col-10">
+                Predicciones Ingresadas
+            </div>
+            <div class="col-2">
+                <button (click)="ngAfterViewInit()" class="btn btn-success btn-icon" type="button">
+                    <i class="nb-loop" ></i>
+                  </button>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+
+            <table class="table table-hover table-sm">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Equipo A</th>
+                    <th scope="col">Goles A</th>
+                    <th scope="col">Goles B</th>
+                    <th scope="col">Equipo B</th>
+                    <th scope="col">Ganador</th>
+                    <th scope="col">Califica</th>
+                    <th scope="col">Puntos</th>
+                    <th scope="col">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor= "let game of predictions">
+                    <td>{{game.dateLocal}}</td>
+                    <td>{{game.teamName1}}</td>
+                    <td>{{game.scoreTeam1}}</td>
+                    <td>{{game.scoreTeam2}}</td>
+                    <td>{{game.teamName2}}</td>
+                    <td>{{game.winnerName}}</td>
+                    <td>{{game.QualifyName}}</td>
+                    <td>{{game.Points}}</td>
+                    <td>
+                        <button (click)="updateProjection(game.scoreTeam1,game.scoreTeam2,game.teamId1,game.teamId2,game.winnerId,game.predictionId,game.teamName1,game.teamName2,game.QualifyId,game.Fase,game.gameId)" class="btn btn-primary btn-icon" type="button">
+                          <i class="nb-compose" ></i>
+                        </button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+        </nb-card-body>
+        <nb-card-footer></nb-card-footer>
+    </nb-card>
+
+  </div>
+</div>

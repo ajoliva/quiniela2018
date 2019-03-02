@@ -4,14 +4,50 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { ProjectionsComponent} from './projections/projections.component'
 
-const routes: Routes = [{
+import { AuthGuard } from '../pages/services/auth/auth.guard.component';
+import { UserPredictionsComponent } from './user-predictions/user-predictions.component';
+import { LeaderboardComponent } from './leaderboards/leaderboard.component';
+import { UserpointsComponent } from './user-points/userpoints.component';
+import { GameAdminComponent } from './game-admin/game-admin.component';
+import { AuthAdminGuard } from './services/auth/auth.guard.admin.component';
+
+const routes: Routes = [
+  
+  {
   path: '',
   component: PagesComponent,
-  children: [{
+  children: [
+    /* {
     path: 'dashboard',
     component: DashboardComponent,
-  }, {
+    canActivate:[AuthGuard]
+  }, */ {
+    path: 'projections',
+    component:ProjectionsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'predictions',
+    component:UserPredictionsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'leaderboard',
+    component:LeaderboardComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'userpoints',
+    component:UserpointsComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'game-admin',
+    component:GameAdminComponent,
+    canActivate:[AuthAdminGuard]
+  }, /* {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',
   }, {
@@ -35,9 +71,9 @@ const routes: Routes = [{
   }, {
     path: 'miscellaneous',
     loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
-  }, {
+  }, */ {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'projections',
     pathMatch: 'full',
   }, {
     path: '**',

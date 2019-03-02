@@ -1,0 +1,34 @@
+drop trigger if exists trg_set_user_points;
+DELIMITER $$
+
+CREATE TRIGGER trg_set_user_points AFTER UPDATE ON prediction FOR EACH ROW begin
+
+DECLARE FASE Int;
+
+Select game.Fase INTO FASE FROM game where gameid=new.gameId;
+
+IF  FASE=1 THEN
+	Update users SET pointsfase1= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=1 and gameid<=48) WHERE userId=new.userId;
+END IF;
+
+IF  FASE=2 THEN
+	Update users SET pointsfase2= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=2 and gameid>48 and gameid<=56) WHERE userId=new.userId;
+END IF;
+
+IF  FASE=3 THEN
+	Update users SET pointsfase3= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=3 and gameid>56 and gameid<=60) WHERE userId=new.userId;
+END IF;
+
+IF  FASE=4 THEN
+	Update users SET pointsfase4= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=4 and gameid>60 and gameid<=62) WHERE userId=new.userId;
+END IF;
+
+IF  FASE=5 THEN
+	Update users SET pointsfase5= (SELECT SUM(Points) from prediction WHERE userId=new.userId and FASE=5 and gameid>62 and gameid<=64) WHERE userId=new.userId;
+END IF;
+
+Update users SET totalpoints = pointsfase1 + pointsfase2 + pointsfase3 + pointsfase4 + pointsfase5 WHERE userId=new.userId;
+
+end
+$$
+DELIMITER ;
